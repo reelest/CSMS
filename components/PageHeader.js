@@ -42,7 +42,7 @@ export default function PageHeader({ title, onSearch }) {
           </IconButton>
         </Hidden>
         <Typography variant="h5" as="h1">
-          {title} - {useBreakpoints().stop}
+          {title}
         </Typography>
         <Hidden smUp>
           <Avatar />

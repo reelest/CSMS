@@ -3,12 +3,23 @@ import { Model, Item } from "./lib/model";
 export class Event extends Item {
   date = new Date();
   title = "Untitled";
-  scope = {
-    teachers: true,
-    parents: true,
-    students: true,
-    admins: true,
-  };
+  forTeachers = true;
+  forParents = true;
+  forStudents = true;
+  forAdmins = true;
+  static {
+    Object.defineProperty(this.prototype, "scope", {
+      get() {
+        return {
+          teachers: this.forTeachers,
+          parents: this.forParents,
+          students: this.forStudents,
+          admins: this.forAdmins,
+        };
+      },
+    });
+  }
 }
+
 const Events = new Model("events", Event);
 export default Events;

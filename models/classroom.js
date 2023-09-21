@@ -1,3 +1,4 @@
+import { MODEL_ITEM_PREVIEW } from "@/components/ModelItemPreview";
 import Admins, { Admin } from "./admin";
 import Courses from "./course";
 import { Model, Item } from "./lib/model";
@@ -20,6 +21,11 @@ export class ClassRoom extends Item {
   }
 }
 const ClassRooms = new Model("classes", ClassRoom, {
+  [MODEL_ITEM_PREVIEW](item) {
+    return {
+      title: item.name + " " + item.branch,
+    };
+  },
   formTeacher: {
     type: "ref",
     refModel: Admins,
