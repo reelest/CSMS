@@ -12,8 +12,6 @@ import SessionSelect from "../SessionSelect";
 import { Button, Tab, Tabs } from "@mui/material";
 import ModelFormDialog from "../ModelFormDialog";
 import { useEffect, useState } from "react";
-import ClassRooms from "@/models/classroom";
-import CourseDescriptions from "@/models/course_description";
 import DummyCourses from "@/models/dummy_course";
 import { supplyModelValues } from "../ModelDataView";
 import ThemedTable from "../ThemedTable";

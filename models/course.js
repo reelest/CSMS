@@ -1,5 +1,4 @@
 import { Model, Item } from "./lib/model";
-import ClassRooms from "./classroom";
 import { getSessions } from "@/logic/session";
 import { HiddenField } from "./lib/model_types";
 import { CountedItem } from "./lib/counted_item";
@@ -25,8 +24,7 @@ const Courses = new Model("courses", Course, {
   },
   classId: {
     type: "ref",
-    refModel: ClassRooms,
-    pickRefQuery: (item) => ClassRooms.withFilter("classId", "==", item.id()),
+    refModel: null,
   },
   teacherId: {
     type: "ref",
