@@ -59,6 +59,13 @@ export default function AcademicsPage() {
         onClose={() => setFormVisible(false)}
         model={DummyCourses}
       />
+
+      <ModelFormDialog
+        edit={item}
+        isOpen={formCreateVisible}
+        onClose={() => setFormCreateVisible(false)}
+        model={DummyCourses}
+      />
       <PageHeader title="Academics" />
       <Box className="px-4 sm:px-8 py-8">
         <div className="flex flex-wrap justify-between">

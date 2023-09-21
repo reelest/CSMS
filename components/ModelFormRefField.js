@@ -226,12 +226,12 @@ function PickRef({ value, setValue, activePreview, query, props }) {
 
   const resultIterator = useMemo(
     () =>
-      testIterator(1000) ||
-      (typeof query === "string"
+      // testIterator(1000) ||
+      typeof query === "string"
         ? search(serverFilter, query.split(" ").filter(Boolean))
         : typeof query === "function"
         ? asyncIteratorOf(query)
-        : query.iterator(0)),
+        : query.iterator(0),
     [serverFilter, query]
   );
   const iterator = useIterator(resultIterator);
