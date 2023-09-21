@@ -115,7 +115,9 @@ export class Model {
       if (!m.isLocalOnly()) txn.ignorePreviousReads();
       m.onCreate();
       await init(m, txn);
-      if (m.isLocalOnly()) m._isCreated = false; //Prevent saving outside of this transaction
+      txn.onCommit(() => {
+        if (m.isLocalOnly()) m._isCreated = false; //Prevent saving outside of this transaction
+      });
       return m;
     });
   }

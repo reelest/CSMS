@@ -1,7 +1,8 @@
 import { Item, Model, USES_EXACT_IDS } from "./lib/model";
+import { Sessions } from "./session";
 
 export class WebsiteData extends Item {
-  currentSession = "2022/2023";
+  currentSession = "";
   description =
     "This should contain a description of the entire website in 100 to 300 words.";
   address = "University of Benin, Benin-City, Edo State";
@@ -17,7 +18,33 @@ export class WebsiteData extends Item {
 
 export const WebsiteDataModel = new Model("website_data", WebsiteData, {
   [USES_EXACT_IDS]: true,
+  currentSession: {
+    type: "ref",
+    refModel: Sessions,
+    pickRefQuery: Sessions.all(),
+  },
   description: {
     stringType: "longtext",
+  },
+  phone1Label: {
+    required: false,
+  },
+  phone1: {
+    required: false,
+  },
+  phone2Label: {
+    required: false,
+  },
+  phone2: {
+    required: false,
+  },
+  linkedInURL: {
+    required: false,
+  },
+  facebookURL: {
+    required: false,
+  },
+  twitterURL: {
+    required: false,
   },
 });

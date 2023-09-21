@@ -28,8 +28,8 @@ const ClassRooms = new Model("classes", ClassRoom, {
   },
   formTeacher: {
     type: "ref",
-    refModel: Admins,
-    pickRefQuery: Admins.all(),
+    refModel: Teachers,
+    pickRefQuery: Teachers.all(),
   },
 });
 export default ClassRooms;
