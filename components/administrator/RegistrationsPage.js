@@ -21,7 +21,7 @@ export default function RegistrationsPage() {
     () => Registrations.all().pageSize(10),
     [],
     {
-      watch: false,
+      watch: true,
     }
   );
   const [formVisible, setFormVisible] = useState(false);

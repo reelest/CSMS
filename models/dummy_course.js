@@ -1,27 +1,23 @@
-import { Model, Item } from "./lib/model";
+import { Model } from "./lib/model";
 import ClassRooms from "./classroom";
 import { getSessions } from "@/logic/session";
 import { HiddenField } from "./lib/model_types";
 import { CountedItem } from "./lib/counted_item";
 import Teachers from "./teacher";
 import { Sessions } from "./session";
-import CourseDescriptions from "./course_description";
-import { connect } from "./lib/trackRefs";
 
-export class Course extends CountedItem {
-  descriptionId = "";
+export class DummyCourse extends CountedItem {
   name = "";
+  description = "";
   classId = "";
   teacherId = "";
   hrsPerWeek = 0;
   session = getSessions()?.data?.slice?.(-1)?.[0] ?? "";
 }
-const Courses = new Model("courses", Course, {
+const DummyCourses = new Model("courses", DummyCourse, {
   name: HiddenField,
-  descriptionId: {
-    type: "ref",
-    refModel: CourseDescriptions,
-    pickRefQuery: CourseDescriptions.all(),
+  description: {
+    stringType: "longtext",
   },
   classId: {
     type: "ref",
@@ -41,5 +37,4 @@ const Courses = new Model("courses", Course, {
     },
   },
 });
-connect(CourseDescriptions, "assignments", Courses, "descriptionId", true);
-export default Courses;
+export default DummyCourses;

@@ -150,3 +150,5 @@ function createFormField(name, meta, { disabled } = {}) {
       throw new UnimplementedError("Unhandled Input type " + meta.type);
   }
 }
+
+export default ModelFormField;

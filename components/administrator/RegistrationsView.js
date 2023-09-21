@@ -4,8 +4,10 @@ import ThemedTable from "../ThemedTable";
 import Registrations from "@/models/registration";
 
 export default function RegistrationsView() {
-  const { data: registrations, pager } = usePagedQuery(() =>
-    Registrations.all().pageSize(10)
+  const { data: registrations, pager } = usePagedQuery(
+    () => Registrations.all().pageSize(10),
+    [],
+    { watch: true }
   );
   return (
     <ThemedTable

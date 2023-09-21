@@ -26,7 +26,11 @@ const select = (item, i) => {
   }
 };
 export default function TransactionsPage() {
-  const { data: payments, pager } = useQuery(() => Payments.all().pageSize(10));
+  const { data: payments, pager } = useQuery(
+    () => Payments.all().pageSize(10),
+    [],
+    { watch: true }
+  );
   const [formVisible, setFormVisible] = useState(false);
   const [formCreateVisible, setFormCreateVisible] = useState(false);
   const [item, setItem] = useState(null);

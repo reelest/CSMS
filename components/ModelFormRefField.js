@@ -122,6 +122,7 @@ function RefField({
   const setValue = useStable((e) => {
     onChange({ target: { value: _id(e) } });
   });
+  console.log({ value });
   const activeItem = useMemo(
     () =>
       value &&

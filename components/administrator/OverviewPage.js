@@ -28,8 +28,8 @@ export default function OverviewPage() {
   const numRegistrations = useCount(Registrations);
   const completeProfiles =
     (100 *
-      (useQuery(() => Teachers.counter.asQuery(), []).data?.completedProfiles ??
-        0)) /
+      (useQuery(() => Teachers.counter.asQuery(), [], { watch: true }).data
+        ?.completedProfiles ?? 0)) /
     (numTeachers || 1);
   return (
     <Box sx={{ backgroundColor: "background.default", minHeight: "100vh" }}>

@@ -25,7 +25,7 @@ function RequestActivation() {
   const activationRequests = useQuery(
     () => user && ActivationRequests.withFilter("uid", "==", user.uid),
     [user],
-    { watch: false }
+    { watch: true }
   )?.data?.length;
   const { loading, data: activated } = useQuery(
     () => user && UserRoles.item(user.uid).asQuery(),
