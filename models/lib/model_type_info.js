@@ -111,7 +111,9 @@ function _getModelPropInfo(key, template, Meta, path) {
         ? _getModelTypeInfo(template, Meta.mapType, path + "{}")
         : undefined,
     pickRefQuery: Meta.pickRefQuery ?? "",
-    label: Meta.label ?? sentenceCase(key.replace(/([a-z])([A-Z])/g, "$1 $2")),
+    label:
+      Meta.label ??
+      sentenceCase(key.replace(/Id$/, "").replace(/([a-z])([A-Z])/g, "$1 $2")),
     refModel: Meta.refModel,
   };
 }

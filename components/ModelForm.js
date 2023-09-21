@@ -69,7 +69,7 @@ export default function ModelForm({
           children
         ) : (
           <>
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap justify-between">
               <Typography
                 variant="body2"
                 color="text.disabled"

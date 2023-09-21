@@ -5,8 +5,9 @@ import { HiddenField } from "./lib/model_types";
 import { CountedItem } from "./lib/counted_item";
 import Teachers from "./teacher";
 import { Sessions } from "./session";
+import CourseDescriptions from "./course_description";
 
-export class DummyCourse extends CountedItem {
+export class AssignedCourse extends CountedItem {
   name = "";
   description = "";
   classId = "";
@@ -14,10 +15,12 @@ export class DummyCourse extends CountedItem {
   hrsPerWeek = 0;
   session = getSessions()?.data?.slice?.(-1)?.[0] ?? "";
 }
-const DummyCourses = new Model("courses", DummyCourse, {
+const AssignedCourses = new Model("courses", AssignedCourse, {
   name: HiddenField,
   description: {
-    stringType: "longtext",
+    type: "ref",
+    refModel: CourseDescriptions,
+    pickRefQuery: CourseDescriptions.all(),
   },
   classId: {
     type: "ref",
@@ -32,9 +35,7 @@ const DummyCourses = new Model("courses", DummyCourse, {
   session: {
     type: "ref",
     refModel: Sessions,
-    pickRefQuery: async function* () {
-      yield* getSessions().data;
-    },
+    pickRefQuery: Sessions.all(),
   },
 });
-export default DummyCourses;
+export default AssignedCourses;

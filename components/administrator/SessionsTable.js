@@ -3,12 +3,13 @@ import ModelFormDialog from "../ModelFormDialog";
 import { useQuery } from "@/models/lib/query";
 import { useEffect, useState } from "react";
 import PageHeader from "../PageHeader";
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box, Button, Modal, Paper, Typography } from "@mui/material";
 import { Add } from "iconsax-react";
 import ThemedTable from "../ThemedTable";
 import { supplyModelValues } from "../ModelDataView";
-import Form from "../Form";
+import Form, { FormField, FormSubmit } from "../Form";
 
+const _id = (id) => id.replace(/\//g, "^");
 export default function SessionsTable() {
   const { data: sessions, pager } = useQuery(
     () => Sessions.all().pageSize(10),
@@ -28,7 +29,8 @@ export default function SessionsTable() {
     setItem(sessions[row]);
     setFormVisible(true);
   };
-
+  const now = new Date();
+  const currentYear = "" + now.getFullYear() + "/" + (now.getFullYear() + 1);
   return (
     <>
       <ModelFormDialog
@@ -41,16 +43,37 @@ export default function SessionsTable() {
       <Modal
         open={formCreateVisible}
         onClose={() => setFormCreateVisible(false)}
+        className="flex justify-center items-center"
       >
-        <Form
-          initialValue={{ name: "" }}
-          onSubmit={async (data) => {
-            let m = await Sessions.getOrCreate(data.name);
-            setFormCreateVisible(false);
-            setItem(m);
-            setFormVisible(true);
-          }}
-        ></Form>
+        <Paper className="max-w-xl pt-4 px-8 max-sm:px-4 pb-4">
+          <Form
+            initialValue={{ name: currentYear }}
+            onSubmit={async (data) => {
+              let m = await Sessions.getOrCreate(
+                _id(data.name),
+                async (item, txn) => {
+                  if (item.isLocalOnly())
+                    await item.set({ name: data.name }, txn);
+                }
+              );
+              setFormCreateVisible(false);
+              setItem(m);
+              setFormVisible(true);
+            }}
+          >
+            <FormField
+              name="name"
+              label="Session Name"
+              placeholder="20XX/20XX"
+            />
+            <FormSubmit
+              variant="contained"
+              sx={{ mt: 5, mx: "auto", display: "block" }}
+            >
+              Done
+            </FormSubmit>
+          </Form>
+        </Paper>
       </Modal>
       <PageHeader title="Sessions" />
       <Box className="px-4 sm:px-8 py-8">

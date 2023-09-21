@@ -34,6 +34,7 @@ import useStable from "@/utils/useStable";
 import { AddCircle, CloseCircle } from "iconsax-react";
 import { useOnCreateItem } from "./ModelForm";
 import { getDefaultValue } from "../models/lib/model_type_info";
+import { noop } from "@/utils/none";
 /**
  * @type {import("react").Context<import("@/utils/useIterator").UseIterator<import("@/models/lib/model").Item>>}
  */
@@ -145,20 +146,22 @@ function RefField({
     })();
   }, [activeItem, newItem, onCreateItem, setValue, meta]);
   return (
-    <div className="flex">
+    <div className="flex items-end">
       <input
         name={name}
         value={value}
+        onChange={noop}
         id={id}
         type="text"
         required={required}
         form={props?.inputProps?.form}
         style={{ padding: 0, maxWidth: 0, border: "none" }}
       />
-      {query && !disabled ? (
+      {query ? (
         <PickRef
           {...{
             value,
+            disabled,
             setValue,
             activePreview: activeItem,
             query,
@@ -181,9 +184,10 @@ function RefField({
             edit={newItem}
             model={meta.refModel}
             noSave
-            onSubmit={(data) => {
-              newItem.setData(data);
-            }}
+            // onSubmit={(data) => {
+            //   newItem.setData(data);
+            //   setValue(newItem.id());
+            // }}
             isOpen={open}
             onClose={() => setOpen(false)}
           />
@@ -202,11 +206,8 @@ function RefField({
  * @param {String} params.value
  * @param {import("../models/lib/model_type_info").ModelPropInfo} params.meta
  * @param {*} params.props  */
-function CreateRef({ id, name, value, setValue, activePreview, meta, props }) {
-  return <></>;
-}
 
-function PickRef({ value, setValue, activePreview, query, props }) {
+function PickRef({ value, disabled, setValue, activePreview, query, props }) {
   const [open, setOpen] = useState(false);
   const [filterText, setFilterText] = useState("");
   const [serverFilter, setServerFilter] = useState("");
@@ -231,7 +232,13 @@ function PickRef({ value, setValue, activePreview, query, props }) {
         ? search(serverFilter, query.split(" ").filter(Boolean))
         : typeof query === "function"
         ? asyncIteratorOf(query)
-        : query.iterator(0),
+        : query
+        ? query.iterator(0)
+        : {
+            next() {
+              return { done: true };
+            },
+          },
     [serverFilter, query]
   );
   const iterator = useIterator(resultIterator);
@@ -264,7 +271,7 @@ function PickRef({ value, setValue, activePreview, query, props }) {
         onClose={() => setOpen(false)}
         inputValue={filterText}
         onInputChange={(_, value) => setFilterText(value)}
-        loading={loading && !results?.length}
+        loading={loading && query && !results?.length}
         filterOptions={(x) =>
           filterable
             ? x
@@ -273,6 +280,7 @@ function PickRef({ value, setValue, activePreview, query, props }) {
                 .map((e) => e[1])
             : x
         }
+        disabled={disabled}
         ListboxComponent={InfiniteList}
         ListboxProps={{ elevation: 5 }}
         loadingText={<CircularProgress sx={{ display: "block", mx: "auto" }} />}
@@ -284,7 +292,14 @@ function PickRef({ value, setValue, activePreview, query, props }) {
               inputProps: {
                 ...params.inputProps,
                 ...props.inputProps,
-                autoComplete: "new-password", // disable autocomplete and autofill
+                autoComplete: "new-password",
+                // disable autocomplete and autofill
+              },
+            }}
+            sx={{
+              ...params.sx,
+              "& .MuiInputBase-root": {
+                flexWrap: "nowrap",
               },
             }}
             {...params}

@@ -12,7 +12,7 @@ import SessionSelect from "../SessionSelect";
 import { Button, Tab, Tabs } from "@mui/material";
 import ModelFormDialog from "../ModelFormDialog";
 import { useEffect, useState } from "react";
-import DummyCourses from "@/models/dummy_course";
+import AssignedCourses from "@/models/dummy_course";
 import { supplyModelValues } from "../ModelDataView";
 import ThemedTable from "../ThemedTable";
 import ClassesTable from "./ClassesTable";
@@ -21,7 +21,7 @@ import SessionsTable from "./SessionsTable";
 
 const TABS = [
   {
-    model: DummyCourses,
+    model: AssignedCourses,
     header: "Courses",
     name: "course",
   },
