@@ -22,12 +22,12 @@ const DummyCourses = new Model("courses", DummyCourse, {
   classId: {
     type: "ref",
     refModel: ClassRooms,
-    pickRefQuery: (item) => ClassRooms.withFilter("classId", "==", item.id()),
+    pickRefQuery: ClassRooms.all(),
   },
   teacherId: {
     type: "ref",
     refModel: Teachers,
-    pickRefQuery: "teacher",
+    pickRefQuery: Teachers.all(),
   },
   session: {
     type: "ref",
