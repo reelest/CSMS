@@ -35,6 +35,7 @@ import { AddCircle, CloseCircle } from "iconsax-react";
 import { useOnCreateItem } from "./ModelForm";
 import { getDefaultValue } from "../models/lib/model_type_info";
 import { noop } from "@/utils/none";
+import useLogger from "@/utils/useLogger";
 /**
  * @type {import("react").Context<import("@/utils/useIterator").UseIterator<import("@/models/lib/model").Item>>}
  */
@@ -118,12 +119,17 @@ function RefField({
   );
   const [open, setOpen] = useState(false);
 
-  const query = meta.pickRefQuery;
+  const query = useMemo(
+    () =>
+      meta.pickRefQuery === true ? meta.refModel.all() : meta.pickRefQuery,
+    [meta]
+  );
 
   const setValue = useStable((e) => {
     onChange({ target: { value: _id(e) } });
   });
-  console.log({ value });
+
+  useLogger({ id, value, open, query });
   const activeItem = useMemo(
     () =>
       value &&
@@ -184,10 +190,10 @@ function RefField({
             edit={newItem}
             model={meta.refModel}
             noSave
-            // onSubmit={(data) => {
-            //   newItem.setData(data);
-            //   setValue(newItem.id());
-            // }}
+            onSubmit={(data) => {
+              newItem.setData(data);
+              setValue(newItem.id());
+            }}
             isOpen={open}
             onClose={() => setOpen(false)}
           />

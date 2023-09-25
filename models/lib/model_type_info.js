@@ -26,7 +26,7 @@ import { InvalidParameters } from "./errors";
  *    objectType?: ModelTypeInfo,
  *    arrayType?: ModelPropInfo,
  *    mapType?: ModelPropInfo,
- *    pickRefQuery?: QueryCursor | String | ()=>AsyncGenerator<Item[], Item[], never>, 
+ *    pickRefQuery?: true|QueryCursor | String | ()=>AsyncGenerator<Item[], Item[], never>, 
  *    refModel: Model,
  *    label: string,
  *  }} ModelPropInfo

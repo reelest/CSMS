@@ -3,10 +3,10 @@ import CourseDescriptions from "./course_description";
 import { CountedItem } from "./lib/counted_item";
 import { ItemDoesNotExist, checkError } from "./lib/errors";
 import { Item, Model } from "./lib/model";
-import { increment } from "firebase/firestore";
+import UpdateValue from "./lib/update_value";
 import { range } from "d3";
 /**
- * @typedef {import("firebase/firestore").Transaction} Transaction;
+ * @typedef {import("./lib/transaction").default} Transaction;
  */
 export class Grade extends CountedItem {
   scores = {};
@@ -72,17 +72,17 @@ class GradeSummary extends Item {
     return keys.reduce(
       (acc, a) => (
         (acc[a] = {
-          total: increment(newScores[a] | 0) - (oldScores[a] | 0),
-          count: increment(
+          total: UpdateValue.add(newScores[a] | 0) - (oldScores[a] | 0),
+          count: UpdateValue.add(
             !!(newScores[a] === undefined) - !!(oldScores[a] === undefined)
           ),
           ...(bucket(oldScores[a]) !== bucket(newScores[a])
             ? {
                 ...(bucket(oldScores[a]) === undefined
-                  ? { [bucket(oldScores[a])]: increment(-1) }
+                  ? { [bucket(oldScores[a])]: UpdateValue.add(-1) }
                   : {}),
                 ...(bucket(newScores[a]) === undefined
-                  ? { [bucket(newScores[a])]: increment(1) }
+                  ? { [bucket(newScores[a])]: UpdateValue.add(1) }
                   : {}),
               }
             : {}),
@@ -98,7 +98,7 @@ class GradeSummary extends Item {
       {
         scores: {
           ...GradeSummary.diff(prevState?.scores, newState?.scores),
-          numScores: increment(!!newState - !!prevState),
+          numScores: UpdateValue.add(!!newState - !!prevState),
         },
       },
       txn
@@ -128,7 +128,7 @@ const Grades = new Model("grades", Grade, {
         label: "Subject",
         type: "ref",
         refModel: CourseDescriptions,
-        pickRefQuery: CourseDescriptions.all(),
+        pickRefQuery: true,
       },
       value: {
         label: "Score",

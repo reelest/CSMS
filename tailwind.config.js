@@ -1,10 +1,11 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const tailwindConfig = {
   content: ["./{components,pages,utils}/**/*.{js,html,jsx}"],
   theme: {
     extend: {
       colors: {
         primary: "#170dd8",
+        hoverPrimary: "#deddfd",
         primaryDark: "#070441",
         secondary: "#ff8200",
         bg: "#f9f9fc",
@@ -21,3 +22,5 @@ module.exports = {
   },
   plugins: [],
 };
+
+module.exports = tailwindConfig;

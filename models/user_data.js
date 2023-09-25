@@ -1,4 +1,4 @@
-import { increment } from "firebase/firestore";
+import UpdateValue from "./lib/update_value";
 import { CountedItem } from "./lib/counted_item";
 import { Item, Model, USES_EXACT_IDS } from "./lib/model";
 import { HiddenField, HiddenTime } from "./lib/model_types";
@@ -50,7 +50,7 @@ export class UserData extends CountedItem {
     if (prevState.profileCompleted)
       this.getCounter().set(
         {
-          completedProfiles: increment(-1),
+          completedProfiles: UpdateValue.add(-1),
         },
         txn
       );
@@ -61,7 +61,7 @@ export class UserData extends CountedItem {
     if (newState.profileCompleted)
       this.getCounter().set(
         {
-          completedProfiles: increment(1),
+          completedProfiles: UpdateValue.add(1),
         },
         txn
       );

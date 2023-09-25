@@ -21,7 +21,7 @@ export const WebsiteDataModel = new Model("website_data", WebsiteData, {
   currentSession: {
     type: "ref",
     refModel: Sessions,
-    pickRefQuery: Sessions.all(),
+    pickRefQuery: true,
   },
   description: {
     stringType: "longtext",

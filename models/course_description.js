@@ -1,6 +1,8 @@
-import Courses from "./course";
+import { MODEL_ITEM_PREVIEW } from "@/components/ModelItemPreview";
+import AssignedCourses from "./assigned_course";
 import { CountedItem } from "./lib/counted_item";
 import { Model } from "./lib/model";
+import { associateModels } from "./lib/trackRefs";
 
 export class CourseDescription extends CountedItem {
   name = "";
@@ -13,7 +15,7 @@ export class CourseDescription extends CountedItem {
     )
       await Promise.all(
         newState.assignments.map(async (e) =>
-          Courses.item(e).set(
+          AssignedCourses.item(e).set(
             {
               description: newState.description,
               name: newState.name,
@@ -26,18 +28,30 @@ export class CourseDescription extends CountedItem {
   static {
     this.markTriggersUpdateTxn(["name", "description"], false);
   }
-  //TODO: add a firestore rule to ensure that no description is deleted without all courses deleted
 }
 const CourseDescriptions = new Model("course_descriptions", CourseDescription, {
+  [MODEL_ITEM_PREVIEW](item) {
+    return {
+      title: item.name,
+    };
+  },
   description: {
     stringType: "longtext",
   },
   assignments: {
     arrayType: {
       type: "ref",
-      refModel: null /*Course - No circular references allowed*/,
+      refModel: AssignedCourses /*Course - No circular references allowed*/,
       hidden: true,
     },
   },
 });
+
+associateModels(
+  CourseDescriptions,
+  "assignments",
+  AssignedCourses,
+  "description",
+  true
+);
 export default CourseDescriptions;

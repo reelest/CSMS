@@ -91,6 +91,6 @@ export function supplyModelValues(props) {
       return <ModelDataView item={items[row]} name={props[col]} />;
     } else if (items?.[row] && _get(props[col]) in items[row]) {
       return <Await value={items[row][_get(props[col])]()} />;
-    }
+    } else return items;
   });
 }
