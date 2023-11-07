@@ -82,6 +82,7 @@ export default function RegistrationsPage() {
             addClassToColumns("whitespace-nowrap", [4]),
             supplyValue((row, col) => {
               const item = registrations[row];
+              if (!item) return;
               switch (col) {
                 case 0:
                   return item.getName();

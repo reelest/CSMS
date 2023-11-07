@@ -21,6 +21,7 @@ export default function PaymentsView() {
       renderHooks={[
         supplyValue((row, col) => {
           const item = payments[row];
+          if (!item) return;
           switch (col) {
             case 0:
               return item.title;

@@ -41,7 +41,7 @@ export default function Sidebar({ children, isStatic = false, tabs = [] }) {
       }}
     >
       <nav className="text-white w-72 flex-shrink-0 pt-4 pb-8 flex flex-col justify-start h-full">
-        <AppLogo className="block mx-auto relative right-2 pt-4 pb-8 w-auto px-4" />
+        <AppLogo className="block mx-auto relative right-2 pt-4 pb-8 h-36 w-auto px-4" />
         <div className="flex flex-col flex-grow overflow-auto pl-8 pr-6">
           {tabs.map(({ icon, name, id = name.toLowerCase() }) =>
             id === "settings" ? null : (

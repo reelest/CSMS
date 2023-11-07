@@ -275,6 +275,7 @@ function ActivationRequestsTable() {
           addClassToColumns("w-0", [3, 4]),
           supplyValue((row, col, data) => {
             const item = /** @type {ActivationRequest}*/ (data[row]);
+            if (!item) return;
             switch (col) {
               case 0:
                 return item.name;

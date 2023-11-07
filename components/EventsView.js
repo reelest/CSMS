@@ -116,6 +116,7 @@ const WeekView = ({ date }) => {
       rows={1}
       className="w-full leading relative -left-2"
       headerClass=""
+      mi
       renderHooks={[
         supplyHeader((col) => sentenceCase(days[col])),
         addHeaderClass(`text-center text-disabled ${styles["week-header"]}`),

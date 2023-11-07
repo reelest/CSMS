@@ -18,6 +18,7 @@ export default function RegistrationsView() {
       renderHooks={[
         supplyValue((row, col) => {
           const item = registrations[row];
+          if (!item) return;
           switch (col) {
             case 0:
               return item.getName();

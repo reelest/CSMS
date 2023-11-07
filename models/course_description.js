@@ -1,8 +1,7 @@
 import { MODEL_ITEM_PREVIEW } from "@/components/ModelItemPreview";
 import AssignedCourses from "./assigned_course";
 import { CountedItem } from "./lib/counted_item";
-import { Model } from "./lib/model";
-import { associateModels } from "./lib/trackRefs";
+import { CountedModel } from "./lib/counted_model";
 
 export class CourseDescription extends CountedItem {
   name = "";
@@ -29,29 +28,31 @@ export class CourseDescription extends CountedItem {
     this.markTriggersUpdateTxn(["name", "description"], false);
   }
 }
-const CourseDescriptions = new Model("course_descriptions", CourseDescription, {
-  [MODEL_ITEM_PREVIEW](item) {
-    return {
-      title: item.name,
-    };
-  },
-  description: {
-    stringType: "longtext",
-  },
-  assignments: {
-    arrayType: {
-      type: "ref",
-      refModel: AssignedCourses /*Course - No circular references allowed*/,
-      hidden: true,
+const CourseDescriptions = new CountedModel(
+  "course_descriptions",
+  CourseDescription,
+  {
+    [MODEL_ITEM_PREVIEW](item) {
+      return {
+        title: item.name,
+      };
     },
-  },
+    description: {
+      stringType: "longtext",
+    },
+    assignments: {
+      arrayType: {
+        type: "ref",
+        refModel: AssignedCourses /*Course - No circular references allowed*/,
+        hidden: true,
+      },
+    },
+  }
+);
+
+CourseDescriptions.hasOneOrMore(AssignedCourses, "description", {
+  field: "assignments",
+  deleteOnRemove: true,
 });
 
-associateModels(
-  CourseDescriptions,
-  "assignments",
-  AssignedCourses,
-  "description",
-  true
-);
 export default CourseDescriptions;
