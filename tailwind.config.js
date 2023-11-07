@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const tailwindConfig = {
+module.exports = {
   content: ["./{components,pages,utils}/**/*.{js,html,jsx}"],
   theme: {
     extend: {
@@ -16,11 +16,9 @@ const tailwindConfig = {
         disabledOnPrimaryDark: "#aeafb5",
       },
       borderRadius: {
-        DEFAULT: "12px",
+        DEFAULT: "8px",
       },
     },
   },
   plugins: [],
 };
-
-module.exports = tailwindConfig;

@@ -1,19 +1,12 @@
-import Students from "@/models/student";
-import Teachers from "@/models/teacher";
-import Parents from "@/models/parent";
 import Admins from "@/models/admin";
-import { onUser, useUser } from "./auth";
-import usePromise from "@/utils/usePromise";
-import { useRef } from "react";
-import { useUpdate } from "react-use";
+import { onUser } from "./auth";
 import { UserData, UserRoles } from "@/models/user_data";
-import useListener from "@/utils/useListener";
-import useWindowRef from "@/utils/useWindowRef";
 import { noop } from "@/utils/none";
 import { minutesToMs } from "@/utils/time_utils";
 import { checkError } from "@/models/lib/errors";
 import { FirebaseError } from "firebase/app";
 import createSubscription from "@/utils/createSubscription";
+import Clients from "@/models/client";
 
 const lookupRole = async (uid) => (await UserRoles.getOrCreate(uid, noop)).role;
 
@@ -27,12 +20,8 @@ export const updateUserRole = async (uid, role) => {
  */
 export const mapRoleToUserModel = (role) => {
   switch (role) {
-    case "student":
-      return Students;
-    case "teacher":
-      return Teachers;
-    case "parent":
-      return Parents;
+    case "client":
+      return Clients;
     case "admin":
       return Admins;
   }
@@ -44,7 +33,6 @@ export const mapRoleToUserModel = (role) => {
  */
 const loadUserData = async (user) => {
   const role = await lookupRole(user.uid);
-  console.log({ role });
   if (role !== "guest") {
     return (
       (await mapRoleToUserModel(role).getOrCreate(
@@ -54,14 +42,14 @@ const loadUserData = async (user) => {
             item.email = user.email;
             item.emailVerified = user.emailVerified;
             item.phoneNumber = user.phoneNumber;
-          } else {
-            const lastLogin = new Date();
-            if (
-              Math.abs(lastLogin.getTime() - item.lastLogin.getTime()) >
-              minutesToMs(1)
-            )
-              await item.set({ lastLogin }, txn);
           }
+          const lastLogin = new Date();
+          if (
+            item.isLocalOnly() ||
+            Math.abs(lastLogin.getTime() - item.lastLogin.getTime()) >
+              minutesToMs(1)
+          )
+            await item.set({ lastLogin }, txn);
         }
       )) ?? UserData.of(user)
     );
@@ -77,21 +65,22 @@ const [useUserData] = createSubscription((setUserData) => {
   let m;
   return onUser(async function retry(user) {
     try {
-      window.removeEventListener("online", retry);
       clearTimeout(m);
       if (user) {
         const userData = await loadUserData(user);
         retryDelay = 1000;
-        console.log({ user, userData });
         setUserData(userData);
       } else setUserData(user);
     } catch (e) {
-      console.log({ e });
       checkError(e, FirebaseError);
       retryDelay = retryDelay + Math.min(retryDelay, 60000);
       console.error(e, `Retrying in ${retryDelay / 1000} seconds`);
       m = setTimeout(() => retry(user), Math.min(retryDelay, 60000));
-      window.addEventListener("online", () => retry(user));
+      window.addEventListener("online", function m() {
+        console.log("Back Online");
+        window.removeEventListener("online", m);
+        retry(user);
+      });
     }
   });
 });

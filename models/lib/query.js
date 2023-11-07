@@ -11,6 +11,7 @@ import {
   limitToLast,
   getCountFromServer,
   documentId,
+  queryEqual,
 } from "firebase/firestore";
 import { useEffect, useRef, useState } from "react";
 import createSubscription from "@/utils/createSubscription";
@@ -23,11 +24,8 @@ import useLogger from "@/utils/useLogger";
 import { InvalidParameters, InvalidState } from "./errors";
 import pool from "@/utils/request_pool";
 
-const compareQuery = (query1, query2) => {
-  return query1.isEqual(query2);
-};
-const _getDoc = pool(getDoc, compareQuery);
-const _getDocs = pool(getDocs, compareQuery);
+const _getDoc = pool(getDoc, queryEqual);
+const _getDocs = pool(getDocs, queryEqual);
 export const DEFAULT_ORDERING = "!model-default-ordering";
 export const DEFAULT_ORDERING_DESCENDING = "!model-default-descending";
 export const SECONDARY_ORDERING = "!model-secondary-ordering";
@@ -333,14 +331,14 @@ export class QueryCursor {
     while (results.length >= this._pageSize) {
       yield results;
       try {
-        results = await this.get();
         await this.advance();
+        results = await this.get();
       } catch (e) {
         this._onError?.(e);
         console.error(e);
       }
     }
-    return results;
+    yield results;
   }
   async advance() {
     return await this.seek(this._cache.end);

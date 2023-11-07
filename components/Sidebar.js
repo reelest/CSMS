@@ -15,11 +15,12 @@ import createSubscription from "@/utils/createSubscription";
 import { noop } from "@/utils/none";
 import delay from "@/utils/delay";
 import { useEffect } from "react";
+import useQueryState from "@/utils/useQueryState";
 
 export const [useSidebar, , setSidebar] = createSubscription(noop, false);
 
 export function useActiveTab(tabs) {
-  return useRouter().query["tab"] || tabs[0]?.name?.toLowerCase?.();
+  return useQueryState("tab", tabs[0]?.name?.toLowerCase?.())[0];
 }
 
 export default function Sidebar({ children, isStatic = false, tabs = [] }) {
@@ -40,7 +41,7 @@ export default function Sidebar({ children, isStatic = false, tabs = [] }) {
       }}
     >
       <nav className="text-white w-72 flex-shrink-0 pt-4 pb-8 flex flex-col justify-start h-full">
-        <AppLogo className="block mx-auto relative right-2 mb-16 h-6 w-auto px-4" />
+        <AppLogo className="block mx-auto relative right-2 pt-4 pb-8 w-auto px-4" />
         <div className="flex flex-col flex-grow overflow-auto pl-8 pr-6">
           {tabs.map(({ icon, name, id = name.toLowerCase() }) =>
             id === "settings" ? null : (
