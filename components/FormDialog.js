@@ -26,7 +26,7 @@ export default function FormDialog({
       className="p-4"
     >
       {/* Modal must have only one child */}
-      <Paper className="mx-auto max-w-2xl pt-4 px-8 max-sm:px-4 overflow-auto pb-12 flex flex-col">
+      <Paper className="mx-auto max-h-full max-w-2xl pt-4 px-8 max-sm:px-4 overflow-auto pb-12 flex flex-col">
         <SuccessDialog
           open={submitted}
           onClose={() => {

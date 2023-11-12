@@ -37,6 +37,7 @@ function a11yProps(index) {
 export default function AcademicsPage() {
   return (
     <Box sx={{ backgroundColor: "background.default", minHeight: "100vh" }}>
+      <PageHeader title="User Dashboard" />
       <SessionsTable />
       <CoursesTable />
       <ClassesTable />
