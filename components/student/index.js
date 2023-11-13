@@ -1,26 +1,17 @@
 import DashboardLayout from "@/components/DashboardLayout";
-import {
-  Calendar,
-  Element3,
-  Teacher,
-  UserAdd,
-  UserEdit,
-  WalletMoney,
-} from "iconsax-react";
+import { WalletMoney } from "iconsax-react";
 import Transactions from "./TransactionsPage";
 import Head from "next/head";
-import SettingsPage from "./SettingsPage";
+import UserRedirect from "../UserRedirect";
+
 const TABS = [
   {
     name: "Transactions",
     icon: WalletMoney,
     component: Transactions,
   },
-  {
-    name: "Settings",
-    component: SettingsPage,
-  },
 ];
+
 export default function AdministratorsRoute() {
   return (
     <>
