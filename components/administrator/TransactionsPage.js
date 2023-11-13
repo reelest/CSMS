@@ -12,6 +12,7 @@ import Card1 from "../Card1";
 
 const HEADERS = ["Title", "Description", "Amount", "Date", "Time"];
 const select = (item, i) => {
+  if(!item) return item;
   switch (i) {
     case 0:
       return item.title;

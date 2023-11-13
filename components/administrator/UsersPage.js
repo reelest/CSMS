@@ -222,6 +222,8 @@ function UsersTable({ edit, activeTab }) {
 }
 
 function UsersForm({ edit, model: UserModel, ...props }) {
+  const meta = {...UserModel.Meta};
+  meta.email = {...meta.email, disabled:!!edit}
   return (
     <ModelFormDialog
       edit={edit}
@@ -229,6 +231,7 @@ function UsersForm({ edit, model: UserModel, ...props }) {
         edit ? <>Update Student Registration Info</> : <>Register New Student</>
       }
       model={UserModel}
+      meta = {meta}
       noSave={!edit}
       onSubmit={async (data) => {
         if (!edit) {
