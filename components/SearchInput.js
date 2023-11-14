@@ -48,7 +48,6 @@ export function SearchInput() {
   const iterator = useIterator(resultIterator);
   const { value: results, loading } = iterator;
   const filterable = useMemo(() => results.some(_searchValue), [results]);
-  console.log({ iterator, filterText });
   return (
     <Autocomplete
       disablePortal

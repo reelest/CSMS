@@ -23,14 +23,14 @@ const TABS = [
     component: Overview,
   },
   {
-    name: "Transactions",
-    icon: WalletMoney,
-    component: Transactions,
-  },
-  {
     name: "Users",
     icon: UserEdit,
     component: Users,
+  },
+  {
+    name: "Transactions",
+    icon: WalletMoney,
+    component: Transactions,
   },
   {
     name: "Academics",

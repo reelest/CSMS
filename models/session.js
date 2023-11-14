@@ -36,6 +36,8 @@ class SessionModel extends CountedModel {
     item.sessions = UpdateValue.arrayUnion();
   }
 }
+
+export const sessionId = (id) => id.replace(/\//g, "^");
 export const Sessions = new SessionModel("sessions", Session, {
   [USES_EXACT_IDS]: true,
   [MODEL_ITEM_PREVIEW](item) {

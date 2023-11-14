@@ -14,6 +14,7 @@ export default function RegistrationsView() {
       title="Registrations"
       headers={["Name", "Entrance Class", "Gender"]}
       results={registrations}
+      className="my-6 h-auto mx-2"
       pager={pager}
       renderHooks={[
         supplyValue((row, col) => {
@@ -29,7 +30,7 @@ export default function RegistrationsView() {
           }
         }),
       ]}
-      sx={{ width: "32rem", flexGrow: 1, maxWidth: "50rem" }}
+      sx={{ width: "32rem", flexGrow: 1, maxWidth: "64rem" }}
     />
   );
 }

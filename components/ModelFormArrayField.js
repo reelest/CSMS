@@ -50,7 +50,6 @@ function ArrayField({ name, id, meta, value, onChange, ...props }) {
       }),
     [value, meta, _id, _new]
   );
-  console.log({ value });
   return (
     <>
       {/* For stop browser form validation errors*/}

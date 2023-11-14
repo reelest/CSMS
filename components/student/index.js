@@ -1,14 +1,43 @@
 import DashboardLayout from "@/components/DashboardLayout";
-import { WalletMoney } from "iconsax-react";
-import Transactions from "./TransactionsPage";
+import { Element3, Teacher, WalletMoney } from "iconsax-react";
+import StudentTransactions from "./StudentTransactionsPage";
 import Head from "next/head";
 import UserRedirect from "../UserRedirect";
+import OverviewPage from "./OverviewPage";
+import StudentAcademics from "./StudentAcademicsPage";
+import DEMO from "../DEMO";
 
 const TABS = [
   {
+    name: "Overview",
+    icon: Element3,
+    component: OverviewPage,
+  },
+
+  {
+    name: "Academics",
+    icon: Teacher,
+    component: DEMO,
+  },
+  {
     name: "Transactions",
     icon: WalletMoney,
-    component: Transactions,
+    component: StudentTransactions,
+  },
+  {
+    name: "Transcripts",
+    icon: WalletMoney,
+    component: DEMO,
+  },
+  {
+    name: "Uploads",
+    icon: WalletMoney,
+    component: DEMO,
+  },
+  {
+    name: "Announcements",
+    icon: WalletMoney,
+    component: DEMO,
   },
 ];
 

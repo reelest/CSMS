@@ -43,7 +43,7 @@ const CourseDescriptions = new CountedModel(
     assignments: {
       arrayType: {
         type: "ref",
-        refModel: AssignedCourses /*Course - No circular references allowed*/,
+        refModel: null,
         hidden: true,
       },
     },

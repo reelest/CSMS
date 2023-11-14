@@ -14,7 +14,6 @@ export const ensureCounter = async (model) => {
     else {
       await counter.model().getOrCreate(counter.id(), async (item, txn) => {
         if (item.isLocalOnly()) {
-          console.log("Creating counter " + item.uniqueName());
           await model.initCounter(item);
           await item.save(txn);
         }
@@ -64,15 +63,17 @@ export class CountedModel extends Model {
    * @param {keyof L} fieldB
    * @param {{
    *    field: keyof T,
-   *    deleteOnRemove: boolean
+   *    deleteOnRemove: boolean - Whether we should delete items when the field is deleted
    * }} opts
    */
-  async hasOneOrMore(
-    modelB,
-    fieldB = modelB.Meta[singular(this.uniqueName())] &&
-      singular(this.uniqueName()),
-    { field = singular(modelB.uniqueName()), deleteOnRemove = false } = {}
-  ) {
+  async hasOneOrMore(modelB, fieldB, { field, deleteOnRemove = false } = {}) {
+    if (!field) {
+      if (deleteOnRemove) {
+        throw new Error(
+          "Must provide a mapping field to ensure deleteOnRemove"
+        );
+      } else return hasOneOrMore(modelB, fieldB, this, null, deleteOnRemove);
+    }
     return hasOneOrMore(this, field, modelB, fieldB, deleteOnRemove);
   }
 }

@@ -119,6 +119,7 @@ export class Model {
     const cb = async (_txn) => {
       //TODO - this can lead to unnecessary transaction retries
       const m = new this._Item(this.ref(id), true, this);
+      if (noFirestore) return m;
       try {
         await m.load(_txn);
       } catch (e) {
@@ -244,7 +245,6 @@ export class Item {
     if (noFirestore) throw new InvalidState("No Firestore!!");
 
     //needed especially to trigger update transactions
-    console.log("set....", this.uniqueName());
     this.setData(data);
     if (this.#isLocalOnly) {
       await this.save(txn);
@@ -267,7 +267,7 @@ export class Item {
   }
   async _update(txn, data) {
     if (noFirestore) throw new InvalidState("No Firestore!!");
-    console.log({ data, o: this.uniqueName() });
+
     if (!this._isCreated)
       throw new InvalidState("Cannot save item that is not initialized.");
     if (this._useFastUpdate) {
@@ -348,7 +348,7 @@ export class Item {
     return undefined;
   }
   asQuery() {
-    return new DocumentQueryCursor(this._ref);
+    return new DocumentQueryCursor(this);
   }
   isLocalOnly() {
     return this.#isLocalOnly;

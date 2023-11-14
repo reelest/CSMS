@@ -4,7 +4,7 @@ import Payments from "@/models/payment";
 import { supplyValue } from "../Table";
 import { formatDate, formatNumber, formatTime } from "@/utils/formatNumber";
 
-export default function PaymentsView() {
+export default function StudentPaymentsView() {
   const { data: payments, pager } = usePagedQuery(
     () => Payments.all().pageSize(10),
     [],

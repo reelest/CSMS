@@ -19,6 +19,8 @@ const Payments = new CountedModel("payments", Payment, {
     type: "ref",
     required: false,
     refModel: Fees,
+    hidden: true,
+    pickRefQuery: true,
   },
   initiator: HiddenField,
   beneficiary: HiddenField,

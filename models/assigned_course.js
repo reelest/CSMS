@@ -1,7 +1,5 @@
 import { Model } from "./lib/model";
-import ClassRooms from "./classroom";
 import { CountedItem } from "./lib/counted_item";
-import Teachers from "./teacher";
 
 export class AssignedCourse extends CountedItem {
   description = "";
@@ -14,15 +12,16 @@ const AssignedCourses = new Model("courses", AssignedCourse, {
     type: "ref",
     refModel: null,
     pickRefQuery: true,
+    label: "Course",
   },
   classId: {
     type: "ref",
-    refModel: ClassRooms,
+    refModel: null,
     pickRefQuery: true,
   },
   teacherId: {
     type: "ref",
-    refModel: Teachers,
+    refModel: null,
     pickRefQuery: true,
   },
 });

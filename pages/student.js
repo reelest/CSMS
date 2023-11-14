@@ -1,2 +1,2 @@
-import Administrator from "@/components/administrator";
-export default Administrator;
+import Student from "@/components/student";
+export default Student;

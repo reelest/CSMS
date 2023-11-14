@@ -38,6 +38,15 @@ export default function AcademicsPage() {
   return (
     <Box sx={{ backgroundColor: "background.default", minHeight: "100vh" }}>
       <PageHeader title="User Dashboard" />
+      <Box className="px-4 sm:px-10 py-8">
+        <div className="flex flex-wrap justify-between">
+          <Typography variant="h6" as="h2">
+            Academics
+          </Typography>
+          <SessionSelect />
+        </div>
+      </Box>
+
       <SessionsTable />
       <CoursesTable />
       <ClassesTable />

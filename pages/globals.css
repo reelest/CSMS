@@ -17,3 +17,27 @@ body {
 .Mui-focused > .MuiInput-input {
   opacity: 1;
 }
+
+/* For Webkit browsers (such as Chrome, Safari) */
+.scroll-primary ::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scroll-primary ::-webkit-scrollbar-thumb {
+  @apply bg-primary/* Blue color */;
+}
+
+/* For Firefox */
+.scroll-primary {
+  scrollbar-width: thin;
+  scrollbar-color: theme(colors.primary) transparent;
+}
+
+/* For Internet Explorer and Edge */
+.scroll-primary ::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scroll-primary ::-webkit-scrollbar-thumb {
+  @apply bg-primary/* Blue color */;
+}

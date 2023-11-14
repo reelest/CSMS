@@ -1,13 +1,21 @@
 import createSubscription from "@/utils/createSubscription";
 import { MenuItem, Select, Typography } from "@mui/material";
-import { useSessions } from "@/logic/session";
+import { onNewSessions, useSessions } from "@/logic/session";
 
-const [useSelectedSession, , setSelectedSession] = createSubscription();
+export const [useSelectedSession, , setSelectedSession, getSelectedSession] =
+  createSubscription(function (setData) {
+    return onNewSessions(function ({ data: sessionData }) {
+      let currentSession = getSelectedSession();
+      const sessions = sessionData?.sessions;
+      if (sessions && !(currentSession && sessions.includes(currentSession))) {
+        setData(sessions[0]);
+      }
+    });
+  });
 export default function SessionSelect() {
   const { data: sessionData } = useSessions();
-  console.log({ sessionData });
   const sessions = sessionData?.sessions;
-  const currentSession = useSelectedSession();
+  const currentSession = useSelectedSession() ?? "";
 
   return sessions ? (
     sessions.length === 0 ? (
@@ -19,7 +27,9 @@ export default function SessionSelect() {
         size="small"
       >
         {sessions.map((e) => (
-          <MenuItem key={e}>{e}</MenuItem>
+          <MenuItem key={e} value={e}>
+            {e}
+          </MenuItem>
         ))}
       </Select>
     )

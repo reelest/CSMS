@@ -25,7 +25,6 @@ export class IndexEntry extends CountedItem {
   }
   async onUpdateItem(txn, newState, prevState) {
     await super.onUpdateItem(txn, newState, prevState);
-    console.log({ newState, prevState });
     const added = newState.tokens.filter(notIn(prevState.tokens));
     const removed = prevState.tokens.filter(notIn(newState.tokens));
     updateTokens(removed, this.id(), txn, UpdateValue.arrayRemove);
@@ -42,7 +41,6 @@ function updateTokens(tokens, id, txn, method) {
   tokens.forEach((token) => {
     const index = getIndex(token);
     if (!m[index]) m[index] = {};
-    console.log({ id, token });
     m[index][token.slice(INDEX_SIZE) || "-"] = (
       m[index][token.slice(INDEX_SIZE) || "-"] || []
     ).concat(id);
@@ -67,7 +65,6 @@ export function clearCache() {
 export async function* getSearchResults(tokens) {
   for (let token of tokens) {
     let key = getIndex(token);
-    console.log({ key });
     /** @type {import("@/models/lib/model_type_info").Item} */
     let item;
     if (cache.has(key)) {

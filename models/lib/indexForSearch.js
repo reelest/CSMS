@@ -12,7 +12,6 @@ async function updateInTxn(txn, item, newState) {
   const SearchIndex = (await import("@/models/search_index")).SearchIndex;
   if (item[searchIndexProps]) {
     const { props, indexer } = item[searchIndexProps];
-    console.log("Check index...");
     if (props.some((e) => item.didUpdate(e))) {
       const x = { ...newState };
       await Promise.all(

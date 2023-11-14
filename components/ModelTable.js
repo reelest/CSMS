@@ -12,13 +12,8 @@ import capitalize from "@/utils/capitalize";
 import { addClassToColumns, addHeaderClass, supplyValue } from "./Table";
 import { None, noop } from "@/utils/none";
 
-/**
- *
- * @param {Object} props
- * @param {import("@/models/lib/model").Model<Item>} props.Model
- * @returns
- */
 export default function ModelTable({
+  /** @type {import("@/models/lib/model").Model<Item>} */
   Model,
   Query = Model.all(),
   props = Model.fields(),
@@ -118,7 +113,6 @@ export default function ModelTable({
             addHeaderClass("pr-4"),
             addClassToColumns("w-0", [props.length, props.length + 1]),
             supplyModelValues(props),
-
             supplyValue((row, col, data) => {
               if (!data) return;
               col -= props.length;

@@ -5,14 +5,7 @@ export class Fee extends CountedItem {
   title = "";
   amount = 0;
   description = "";
-  scope = "";
+  filters = ["class:*"];
 }
 
-export const Fees = new CountedModel("fees", Fee, {
-  scope: {
-    options: [
-      { value: "", label: "Every student" },
-      { value: "class", label: "Specific classes" },
-    ],
-  },
-});
+export const Fees = new CountedModel("fees", Fee);

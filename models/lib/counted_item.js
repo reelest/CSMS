@@ -94,7 +94,6 @@ export class CountedItem extends Item {
     );
   }
   async _update(txn, newState, prevState = null) {
-    console.log("Updating..." + this.uniqueName());
     if (this[propsNeedingUpdateTxn]) {
       newState = { ...newState };
       for (let key of this[propsNeedingUpdateTxn]) {
@@ -106,10 +105,8 @@ export class CountedItem extends Item {
     try {
       if (this.#inUpdate) throw new InvalidState("Nested Update!!");
       this.#inUpdate = true;
-      console.log("prepping for atomic update " + this.uniqueName());
       const ret = await this.atomicUpdate(
         async (txn, prevState) => {
-          console.log("Atomic update " + this.uniqueName());
           await super._update(txn, newState, prevState);
           await this.onUpdateItem(txn, newState, prevState);
         },
@@ -219,6 +216,7 @@ export class CountedItem extends Item {
       this.prototype[propsNeedingUpdateTxn].push(e);
       Object.defineProperty(this.prototype, e, {
         ...descriptor,
+        configurable: true,
         set(v) {
           //Make this an own property so it can be picked by Object.keys
           Object.defineProperty(this, e, descriptor);

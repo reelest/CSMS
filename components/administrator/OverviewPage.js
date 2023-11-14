@@ -63,10 +63,10 @@ export default function OverviewPage() {
             value={numRegistrations}
           />
         </div>
-        <div className="flex flex-wrap pt-6 -mx-2 max-sm:justify-center">
+        <div className="flex flex-wrap pt-4 -mx-2 max-sm:justify-center items-stretch">
           <Card2Wrapper
             color="white"
-            className=" px-4 py-4 items-center flex-grow"
+            className=" px-4 py-4 items-center flex-grow my-6"
             sx={{
               border: "1px solid rgba(0,0,0,0.05)",
               maxWidth: { xs: "14.75rem", sm: "25rem" },
@@ -89,7 +89,7 @@ export default function OverviewPage() {
               </Typography>
             </div>
             <Hidden smDown>
-              <PieChart percent={completeProfiles} className="mx-4" />
+              <PieChart percent={completeProfiles} className="mx-4 w-1/2" />
             </Hidden>
           </Card2Wrapper>
           <EventsView />

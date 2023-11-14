@@ -21,5 +21,18 @@ export class Event extends Item {
   }
 }
 
-const Events = new Model("events", Event);
+const Events = new Model("events", Event, {
+  forParents: {
+    label: "Parents",
+  },
+  forTeachers: {
+    label: "Teachers",
+  },
+  forStudents: {
+    label: "Students",
+  },
+  forAdmins: {
+    label: "Admins",
+  },
+});
 export default Events;

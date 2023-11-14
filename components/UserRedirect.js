@@ -7,7 +7,7 @@ const DASHBOARD_URL = {
   admin: "/admin",
   student: "/student",
   parent: "/parent",
-  teacher: "/admin",
+  teacher: "/teacher",
   guest: "/guest",
 };
 

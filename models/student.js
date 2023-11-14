@@ -9,6 +9,10 @@ export class Student extends UserData {
   registrationId = "";
   parentId1 = "";
   parentId2 = "";
+  classId = [];
+  getClass() {
+    return this.model().Meta.classId.refModel.withFilter("isMajor", "==", true);
+  }
   getRole() {
     return "student";
   }
@@ -30,6 +34,13 @@ const Students = new CountedModel("students", Student, {
   medicalInfo: {
     "!modelform-section": "Bio Data",
     required: false,
+  },
+  classId: {
+    arrayType: {
+      type: "ref",
+      pickRefQuery: true,
+      refModel: null,
+    },
   },
 });
 

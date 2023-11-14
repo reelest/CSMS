@@ -9,11 +9,9 @@ import Students from "@/models/student";
 import Teachers from "@/models/teacher";
 import Parents from "@/models/parent";
 import { Hidden } from "@mui/material";
-import Registrations from "@/models/registration";
 import PieChart from "../PieChart";
 import EventsView from "../EventsView";
-import RegistrationsView from "./RegistrationsView";
-import PaymentsView from "./PaymentsView";
+import StudentPaymentsView from "./StudentPaymentsView";
 import SessionSelect from "../SessionSelect";
 
 const useCount = (Model) => {
@@ -25,12 +23,7 @@ export default function OverviewPage() {
   const numStudents = useCount(Students);
   const numTeachers = useCount(Teachers);
   const numParents = useCount(Parents);
-  const numRegistrations = useCount(Registrations);
-  const completeProfiles =
-    (100 *
-      (useQuery(() => Teachers.counter.asQuery(), [], { watch: true }).data
-        ?.completedProfiles ?? 0)) /
-    (numTeachers || 1);
+  const overallPerformance = 40;
   return (
     <Box sx={{ backgroundColor: "background.default", minHeight: "100vh" }}>
       <PageHeader title="User Dashboard" />
@@ -44,23 +37,18 @@ export default function OverviewPage() {
         <div className="flex flex-wrap pt-6 -mx-2">
           <Card2
             icon={ArchiveBox}
-            label="Total number of students"
+            label="Total Classmates"
             value={numStudents}
           />
           <Card2
             icon={ArchiveBox}
-            label="Total number of parents"
+            label="Total Courses Offered"
             value={numParents}
           />
           <Card2
             icon={ArchiveBox}
             label="Total number of teachers"
             value={numTeachers}
-          />
-          <Card2
-            icon={ArchiveBox}
-            label="Total number of new registrations"
-            value={numRegistrations}
           />
         </div>
         <div className="flex flex-wrap pt-6 -mx-2 max-sm:justify-center">
@@ -78,23 +66,22 @@ export default function OverviewPage() {
                 sx={{ mb: 4 }}
                 className="text-center"
               >
-                Completed Teacher Profiles
+                Overall Performance
               </Typography>
 
               <Hidden smUp>
-                <PieChart percent={completeProfiles} className="m-4" />
+                <PieChart percent={overallPerformance} className="m-4" />
               </Hidden>
               <Typography variant="body2" className="text-center">
-                {completeProfiles}%
+                {overallPerformance}%
               </Typography>
             </div>
             <Hidden smDown>
-              <PieChart percent={completeProfiles} className="mx-4" />
+              <PieChart percent={overallPerformance} className="mx-4" />
             </Hidden>
           </Card2Wrapper>
           <EventsView />
-          <RegistrationsView />
-          <PaymentsView />
+          <StudentPaymentsView />
         </div>
       </Box>
     </Box>

@@ -5,6 +5,9 @@ import { ItemDoesNotExist, checkError } from "./lib/errors";
 import { Item, Model } from "./lib/model";
 import UpdateValue from "./lib/update_value";
 import { range } from "d3";
+import { CountedModel } from "./lib/counted_model";
+import { Sessions } from "./session";
+import { getCurrentSession } from "@/logic/website_data";
 /**
  * @typedef {import("./lib/transaction").default} Transaction;
  */
@@ -12,7 +15,7 @@ export class Grade extends CountedItem {
   scores = {};
   classId = "";
   studentId = "";
-  session = "";
+  session = getCurrentSession();
   avg() {
     return this.total() / Object.keys(this.scores).length;
   }
@@ -120,7 +123,7 @@ class GradeSummary extends Item {
   }
 }
 const GradeSummaries = new Model("grade_summaries", GradeSummary);
-const Grades = new Model("grades", Grade, {
+const Grades = new CountedModel("grades", Grade, {
   scores: {
     type: "map",
     mapType: {
@@ -137,4 +140,5 @@ const Grades = new Model("grades", Grade, {
     },
   },
 });
+Sessions.hasOneOrMore(Grades, "session");
 export default Grades;

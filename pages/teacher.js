@@ -1,2 +1,2 @@
-import Administrator from "@/components/administrator";
-export default Administrator;
+import Teacher from "@/components/teacher";
+export default Teacher;

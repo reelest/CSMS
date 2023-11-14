@@ -1,10 +1,9 @@
-import { Sessions } from "@/models/session";
+import { Sessions, sessionId } from "@/models/session";
 import { useState } from "react";
 import { Modal, Paper } from "@mui/material";
 import Form, { FormField, FormSubmit } from "../Form";
 import ModelTable from "../ModelTable";
 
-const _id = (id) => id.replace(/\//g, "^");
 export default function SessionsTable() {
   const [formCreationRequest, setFormCreationRequest] = useState(null);
   const now = new Date();
@@ -27,7 +26,7 @@ export default function SessionsTable() {
             initialValue={{ name: currentYear }}
             onSubmit={async (data) => {
               let m = await Sessions.getOrCreate(
-                _id(data.name),
+                sessionId(data.name),
                 async (item, txn) => {
                   if (item.isLocalOnly())
                     await item.set({ name: data.name }, txn);
