@@ -1,57 +1,41 @@
 import DashboardLayout from "@/components/DashboardLayout";
-import {
-  Calendar,
-  Element3,
-  Teacher,
-  UserAdd,
-  UserEdit,
-  WalletMoney,
-} from "iconsax-react";
-import Overview from "./OverviewPage";
-import Transactions from "./TransactionsPage";
-import Users from "./UsersPage";
-import Events from "./EventsPage";
-import Academics from "./AcademicsPage";
-import UserRedirect from "../UserRedirect";
-import RegistrationsPage from "./RegistrationsPage";
+import { Element3, Teacher, WalletMoney } from "iconsax-react";
+import StudentTransactions from "./StudentTransactionsPage";
 import Head from "next/head";
-import SettingsPage from "./SettingsPage";
+import UserRedirect from "../UserRedirect";
+import OverviewPage from "./OverviewPage";
+import StudentAcademics from "./StudentAcademicsPage";
+import DEMO from "../DEMO";
+
 const TABS = [
   {
     name: "Overview",
     icon: Element3,
-    component: Overview,
+    component: OverviewPage,
   },
+
   {
-    name: "Transactions",
-    icon: WalletMoney,
-    component: Transactions,
-  },
-  {
-    name: "Users",
-    icon: UserEdit,
-    component: Users,
-  },
-  {
-    name: "Academics",
+    name: "Student",
     icon: Teacher,
-    component: Academics,
+    component: DEMO,
   },
   {
-    name: "Registrations",
-    icon: UserAdd,
-    component: RegistrationsPage,
+    name: "Class",
+    icon: Teacher,
+    component: DEMO,
   },
   {
-    name: "News & Events",
-    icon: Calendar,
-    component: Events,
+    name: "Uploads",
+    icon: WalletMoney,
+    component: DEMO,
   },
   {
-    name: "Settings",
-    component: SettingsPage,
+    name: "Announcements",
+    icon: WalletMoney,
+    component: DEMO,
   },
 ];
+
 export default function AdministratorsRoute() {
   return (
     <>
