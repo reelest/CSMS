@@ -5,7 +5,7 @@ import useUserData from "@/logic/user_data";
 
 const DASHBOARD_URL = {
   admin: "/admin",
-  student: "/teacher",
+  student: "/student",
   parent: "/parent",
   teacher: "/teacher",
   guest: "/guest",
