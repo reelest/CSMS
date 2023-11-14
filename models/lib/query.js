@@ -677,6 +677,7 @@ export function usePagedQuery(createQuery, deps = [], { ...opts } = {}) {
   // TODO: test how this interacts with the null padded data
   useEffect(() => {
     if (
+      query &&
       data?.length !== undefined &&
       ((data.length < query._pageSize && !isOnLastPage) || data.length === 0)
     ) {
