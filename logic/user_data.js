@@ -40,6 +40,7 @@ export const mapRoleToUserModel = (role) => {
 const loadUserData = async (user) => {
   const role = await lookupRole(user.uid);
   if (role !== "guest") {
+    console.log({ role });
     return (
       (await mapRoleToUserModel(role).getOrCreate(
         user.uid,

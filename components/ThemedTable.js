@@ -52,7 +52,6 @@ function ThemedTable({
         rows={Math.min(pageSize, results?.length)}
         minRows={Math.min(pageSize, results?.length + 2)}
         headers={headers}
-        rowSpacing={1}
         headerClass="text-disabled text-left"
         rowProps={(row) => ({
           ...(rowProps || None),
@@ -65,7 +64,13 @@ function ThemedTable({
             ...(rowProps?.sx ?? None),
           },
           className:
-            row >= data.length ? "invisible" : "shadow-3 hover:bg-hoverPrimary",
+            (row >= data.length
+              ? "invisible"
+              : "shadow-3 border-solid border-0 " +
+                (selected === row
+                  ? ""
+                  : "border-b hover:bg-hoverPrimary border-b-disabledOnPrimaryDark border-opacity-25")) +
+            " ",
         })}
         renderHooks={[
           ...[_pager ? null : pageData(controller.page, pageSize)].filter(
@@ -75,7 +80,7 @@ function ThemedTable({
             "first:pl-8 pr-4 last:pr-0 font-normal text-gray-400 whitespace-nowrap pb-2"
           ),
           addClassToColumns(
-            "text-gray-800 first:pl-8 pr-8 pt-1 pb-1 first:rounded-l last:rounded-r"
+            "text-gray-800 first:pl-8 pr-8 pt-1 pb-2 first:rounded-l last:rounded-r"
           ),
           ...renderHooks,
         ]}

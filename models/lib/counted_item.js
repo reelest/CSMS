@@ -16,7 +16,6 @@ import {
   onFilesDeleteItem,
   onFilesUpdateItem,
 } from "./trackFiles";
-import typeOf from "@/utils/typeof";
 
 /**
  * A counted item is an item that updates external documents when it changes.

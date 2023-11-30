@@ -14,7 +14,7 @@ import { indexForSearch } from "./lib/indexForSearch";
 //Rather than 1 to N reads for all the users
 //However, the concept of a filtered collection is also there and might be explored in future.
 
-const DEFAULT_ROLE = "client";
+const DEFAULT_ROLE = "guest";
 class UserRole extends Item {
   role = DEFAULT_ROLE;
 }
@@ -81,7 +81,7 @@ export class UserData extends CountedItem {
       async (userRole, txn) => {
         if (userRole.isLocalOnly())
           await userRole.set({ role: this.getRole() }, txn);
-        else {
+        else if (userRole.role !== this.getRole()) {
           await this.upgradeUser(userRole.role);
         }
       },

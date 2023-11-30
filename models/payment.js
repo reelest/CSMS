@@ -28,4 +28,6 @@ const Payments = new CountedModel("payments", Payment, {
   reversalComments: HiddenField,
   paymentMethod: HiddenField,
 });
+
+Fees.hasOneOrMore(Payments, "fee");
 export default Payments;

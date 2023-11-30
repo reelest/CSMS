@@ -23,6 +23,7 @@ async function updateInTxn(txn, item, newState) {
         })
       );
       return SearchIndex.getOrCreate(_id(item), async (index, txn) => {
+        console.trace("creating search index");
         return index.set(await indexer(index, x), txn);
       });
     }
@@ -42,11 +43,8 @@ async function deleteInTxn(txn, item) {
  */
 export function createIndexEntry(props, item, state, prev) {
   return {
-    tokens: props
-      .map((e) => String(state[e] ?? ""))
-      .filter(Boolean)
-      .map(parseQuery)
-      .flat(2)
+    tokens: parseQuery(props.map((e) => String(state[e] ?? "")).join(" "))
+      .flat()
       .concat(prev ? prev.tokens : [])
       .filter(uniq),
   };

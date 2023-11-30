@@ -1,7 +1,6 @@
 import UpdateValue from "./update_value";
 import { Model, Item, noFirestore, USES_EXACT_IDS } from "./model";
 import { CountedItem } from "./counted_item";
-import { singular } from "@/utils/plural";
 import { hasOneOrMore } from "./trackRefs";
 
 const createdCounters = new Set();
@@ -24,6 +23,7 @@ export const ensureCounter = async (model) => {
 };
 
 class MetadataItem extends Item {
+  static strictKeys = false;
   itemCount = 0;
 }
 
