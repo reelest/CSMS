@@ -11,6 +11,8 @@ import createQuery from "@/utils/createQuery";
 import { useDebounce } from "react-use";
 import { IndexEntry } from "@/models/search_index";
 import { Item } from "@/models/lib/model";
+import pick from "@/utils/pick";
+import notIn from "@/utils/notIn";
 export const _searchValue = (e) =>
   e instanceof IndexEntry
     ? e.tokens
@@ -21,7 +23,7 @@ export const _searchValue = (e) =>
     : "";
 
 export const _id = (e) =>
-  e instanceof IndexEntry ? e.getItemId() : e instanceof Item ? e.id() : e;
+  e instanceof IndexEntry ? e.getItem().id : e instanceof Item ? e.id() : e;
 
 export function SearchInput() {
   const [open, setOpen] = useState(false);
@@ -52,12 +54,7 @@ export function SearchInput() {
     <Autocomplete
       disablePortal
       renderOption={(props, option) => (
-        <ModelItemPreview
-          item={option}
-          {...props}
-          sx={{ width: "20rem", maxWidth: "100%", minWidth: 0, ...props.sx }}
-          key={_id(option)}
-        />
+        <ModelItemPreview item={option} {...props} key={_id(option)} />
       )}
       // {...{ groupBy, getOptionLabel, renderGroup }}
       options={results}
@@ -91,8 +88,10 @@ export function SearchInput() {
         <OutlinedInput
           // as={OutlinedInput}
           placeholder="Search"
-          {...params}
-          InputLabelProps={undefined}
+          {...pick(
+            params,
+            Object.keys(params).filter(notIn(["InputProps", "InputLabelProps"]))
+          )}
           sx={{
             ...params.sx,
             "& .MuiInputBase-root": {

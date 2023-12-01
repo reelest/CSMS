@@ -1,4 +1,4 @@
-import AssignedCourses from "./assigned_course";
+import AssignedCourses from "./course_assignment";
 import { CountedModel } from "./lib/counted_model";
 import { UserMeta, UserData } from "./user_data";
 

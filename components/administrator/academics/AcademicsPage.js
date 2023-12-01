@@ -1,15 +1,18 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import PageHeader from "../PageHeader";
-import { Button, Tab, Tabs } from "@mui/material";
-import AssignedCourses from "@/models/course";
-import ClassesTable from "./ClassesTable";
-import CoursesTable from "./CoursesTable";
-import SessionsTable from "./SessionsTable";
+import PageHeader from "../../PageHeader";
+import { Tab, Tabs } from "@mui/material";
 import useQueryState from "@/utils/useQueryState";
+import SessionInfoPage from "./SessionInfoPage";
+import { createElement } from "react";
+
 const TABS = [
   {
-    model: AssignedCourses,
+    header: "Session Info",
+    name: "session",
+    component: SessionInfoPage,
+  },
+  {
     header: "Courses",
     name: "course",
   },
@@ -23,7 +26,7 @@ function a11yProps(index) {
 }
 
 export default function AcademicsPage() {
-  const [activeTab, setActiveTab] = useQueryState("nav");
+  const [activeTab, setActiveTab] = useQueryState("nav", TABS[0].name);
   return (
     <Box sx={{ backgroundColor: "background.default", minHeight: "100vh" }}>
       <PageHeader title="User Dashboard" />
@@ -40,15 +43,19 @@ export default function AcademicsPage() {
             aria-label="basic tabs example"
           >
             {TABS.map((e, i) => (
-              <Tab label={e.header} key={e.name} {...a11yProps(i)} />
+              <Tab
+                label={e.header}
+                key={e.name}
+                {...a11yProps(i)}
+                value={e.name}
+              />
             ))}
           </Tabs>
         </Box>
+        {createElement(
+          TABS.find((e) => e.name === activeTab).component ?? "div"
+        )}
       </Box>
-
-      <SessionsTable />
-      <CoursesTable />
-      <ClassesTable />
     </Box>
   );
 }

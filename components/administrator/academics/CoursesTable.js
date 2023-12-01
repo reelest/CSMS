@@ -1,21 +1,21 @@
 import { useMemo } from "react";
-import ModelTable from "../ModelTable";
-import Courses from "@/models/course";
+import ModelTable from "@/components/ModelTable";
+import AssignedCourses from "@/models/course_assignment";
 import { sessionId } from "@/models/session";
-import { useSelectedSession } from "../SessionSelect";
+import { useSelectedSession } from "@/components/SessionSelect";
 
 export default function CoursesTable() {
   const currentSession = useSelectedSession();
   const query = useMemo(
     () =>
       currentSession
-        ? Courses.withFilter("session", "==", sessionId(currentSession))
+        ? AssignedCourses.withFilter("session", "==", sessionId(currentSession))
         : null,
     [currentSession]
   );
   return (
     <ModelTable
-      Model={Courses}
+      Model={AssignedCourses}
       Query={query}
       deps={[query]}
       addActionTitle="Assign Teacher"

@@ -2,6 +2,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import {
   Calendar,
   Element3,
+  Settings,
   Teacher,
   UserAdd,
   UserEdit,
@@ -11,7 +12,7 @@ import Overview from "./OverviewPage";
 import Transactions from "./TransactionsPage";
 import Users from "./UsersPage";
 import Events from "./EventsPage";
-import Academics from "./AcademicsPage";
+import Academics from "./academics/AcademicsPage";
 import UserRedirect from "../UserRedirect";
 import RegistrationsPage from "./RegistrationsPage";
 import Head from "next/head";
@@ -49,6 +50,7 @@ const TABS = [
   },
   {
     name: "Settings",
+    icon: Settings,
     component: SettingsPage,
   },
 ];

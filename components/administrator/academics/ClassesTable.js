@@ -1,6 +1,6 @@
 import ClassRooms from "@/models/classroom";
-import ModelTable from "../ModelTable";
-import { useSelectedSession } from "../SessionSelect";
+import ModelTable from "@/components/ModelTable";
+import { useSelectedSession } from "@/components/SessionSelect";
 import { useMemo } from "react";
 import { sessionId } from "@/models/session";
 

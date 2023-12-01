@@ -7,7 +7,7 @@ export default function useQueryState(query, defaultValue) {
     router.replace({
       query: {
         ...router.query,
-        [query]: value ? encodeURIComponent(value) : undefined,
+        [query]: value || value === 0 ? encodeURIComponent(value) : undefined,
       },
     });
   });

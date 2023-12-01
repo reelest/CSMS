@@ -57,13 +57,18 @@ export default function Sidebar({ children, isStatic = false, tabs = [] }) {
             )
           )}
           <Spacer className="h-8 flex-shrink-0" />
-          <TabLink
-            isSelected={"settings" === selected}
-            icon={Setting}
-            href={"?tab=settings"}
-          >
-            Settings
-          </TabLink>
+          {tabs.map(({ icon, name, id = name.toLowerCase() }) =>
+            id === "settings" ? (
+              <TabLink
+                key={name}
+                isSelected={id === selected}
+                icon={icon}
+                href={`?tab=${encodeURIComponent(id)}`}
+              >
+                Settings
+              </TabLink>
+            ) : null
+          )}
           <TabLink
             isActivated
             icon={Logout}

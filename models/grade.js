@@ -1,5 +1,5 @@
 import uniq from "@/utils/uniq";
-import CourseDescriptions from "./course_description";
+import CourseDescriptions from "./course";
 import { CountedItem } from "./lib/counted_item";
 import { ItemDoesNotExist, checkError } from "./lib/errors";
 import { Item, Model } from "./lib/model";

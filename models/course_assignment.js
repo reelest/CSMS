@@ -2,9 +2,9 @@ import { Model } from "./lib/model";
 import { CountedItem } from "./lib/counted_item";
 
 export class AssignedCourse extends CountedItem {
+  teacherId = "";
   description = "";
   classId = "";
-  teacherId = "";
   hrsPerWeek = 0;
 }
 const AssignedCourses = new Model("courses", AssignedCourse, {
@@ -25,4 +25,5 @@ const AssignedCourses = new Model("courses", AssignedCourse, {
     pickRefQuery: true,
   },
 });
+import("./course");
 export default AssignedCourses;
