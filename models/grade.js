@@ -1,5 +1,5 @@
 import uniq from "@/utils/uniq";
-import CourseDescriptions from "./course";
+import Courses from "./course";
 import { CountedItem } from "./lib/counted_item";
 import { ItemDoesNotExist, checkError } from "./lib/errors";
 import { Item, Model } from "./lib/model";
@@ -130,7 +130,7 @@ const Grades = new CountedModel("grades", Grade, {
       key: {
         label: "Subject",
         type: "ref",
-        refModel: CourseDescriptions,
+        refModel: Courses,
         pickRefQuery: true,
       },
       value: {

@@ -3,7 +3,7 @@ import AssignedCourses from "./course_assignment";
 import { CountedItem } from "./lib/counted_item";
 import { CountedModel } from "./lib/counted_model";
 
-export class CourseDescription extends CountedItem {
+export class Course extends CountedItem {
   name = "";
   description = "";
   assignments = [];
@@ -28,31 +28,27 @@ export class CourseDescription extends CountedItem {
     this.markTriggersUpdateTxn(["name", "description"], false);
   }
 }
-const CourseDescriptions = new CountedModel(
-  "course_descriptions",
-  CourseDescription,
-  {
-    [MODEL_ITEM_PREVIEW](item) {
-      return {
-        title: item.name,
-      };
+const Courses = new CountedModel("courses", Course, {
+  [MODEL_ITEM_PREVIEW](item) {
+    return {
+      title: item.name,
+    };
+  },
+  description: {
+    stringType: "longtext",
+  },
+  assignments: {
+    arrayType: {
+      type: "ref",
+      refModel: null,
+      hidden: true,
     },
-    description: {
-      stringType: "longtext",
-    },
-    assignments: {
-      arrayType: {
-        type: "ref",
-        refModel: null,
-        hidden: true,
-      },
-    },
-  }
-);
+  },
+});
 
-CourseDescriptions.hasOneOrMore(AssignedCourses, "description", {
+Courses.hasOneOrMore(AssignedCourses, "description", {
   field: "assignments",
   deleteOnRemove: true,
 });
 
-export default CourseDescriptions;
+export default Courses;
