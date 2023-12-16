@@ -6,13 +6,13 @@ import Table, {
   addClassToColumns,
   addHeaderClass,
   pageData,
-} from "@/components/Table";
-import usePager from "@/utils/usePager";
-import Pager from "@/components/Pager";
-import printElement from "@/utils/printElement";
-import Printed from "@/components/Printed";
-import TabbedBox from "./TabbedBox";
-import ThemedTable from "./ThemedTable";
+} from "@/shared/components/Table";
+import usePager from "@/shared/utils/usePager";
+import Pager from "@/shared/components/Pager";
+import printElement from "@/shared/utils/printElement";
+import Printed from "@/shared/components/Printed";
+import TabbedBox from "@/shared/components/TabbedBox";
+import ThemedTable from "@/shared/components/ThemedTable";
 
 export default function TabbedTable({
   results,

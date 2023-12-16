@@ -1,9 +1,9 @@
 import Admins from "@/models/admin";
-import { usePagedQuery, useQuery } from "@/models/lib/query";
+import { usePagedQuery, useQuery } from "@/shared/models/lib/query";
 import Registrations from "@/models/registration";
 import Students from "@/models/student";
 import Teachers from "@/models/teacher";
-import { noop } from "@/utils/none";
+import { noop } from "@/shared/utils/none";
 import {
   Box,
   Button,
@@ -16,20 +16,20 @@ import {
 } from "@mui/material";
 import { Edit as EditIcon, Trash as TrashIcon, UserAdd } from "iconsax-react";
 import { useEffect, useState } from "react";
-import PageHeader from "../PageHeader";
+import PageHeader from "@/components/PageHeader";
 import {
   TableButton,
   addClassToColumns,
   addHeaderClass,
   supplyValue,
-} from "../Table";
-import ThemedTable from "../ThemedTable";
+} from "@/shared/components/Table";
+import ThemedTable from "@/shared/components/ThemedTable";
 
 import ActivationRequests from "@/models/activation_requests";
 import { activateUser, createUser } from "@/logic/admin";
-import ModelFormDialog from "../ModelFormDialog";
-import ModelDataView, { supplyModelValues } from "../ModelDataView";
-import { DatabaseError } from "@/models/lib/errors";
+import ModelFormDialog from "@/shared/components/ModelFormDialog";
+import ModelDataView, { supplyModelValues } from "@/shared/components/ModelDataView";
+import { DatabaseError } from "@/shared/models/lib/errors";
 
 function a11yProps(index) {
   return {

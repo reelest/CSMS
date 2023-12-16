@@ -1,4 +1,4 @@
-import DashboardLayout from "@/components/DashboardLayout";
+import DashboardLayout from "@/shared/components/DashboardLayout";
 import {
   Calendar,
   Element3,
@@ -13,7 +13,7 @@ import Transactions from "./TransactionsPage";
 import Users from "./UsersPage";
 import Events from "./EventsPage";
 import Academics from "./academics/AcademicsPage";
-import UserRedirect from "../UserRedirect";
+import UserRedirect from "@/shared/components/UserRedirect";
 import RegistrationsPage from "./RegistrationsPage";
 import Head from "next/head";
 import SettingsPage from "./SettingsPage";

@@ -1,4 +1,4 @@
-import pool from "@/utils/request_pool";
+import pool from "@/shared/utils/request_pool";
 
 test("should pool requests", async function () {
   let i = 0;

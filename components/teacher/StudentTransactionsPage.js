@@ -1,14 +1,14 @@
 import { Box, Typography, Button, Modal } from "@mui/material";
-import PageHeader from "../PageHeader";
+import PageHeader from "@/components/PageHeader";
 import { Add, Money2 } from "iconsax-react";
-import { useQuery } from "@/models/lib/query";
-import ThemedTable from "../ThemedTable";
-import Table, { addClassToColumns, supplyValue } from "../Table";
+import { useQuery } from "@/shared/models/lib/query";
+import ThemedTable from "@/shared/components/ThemedTable";
+import Table, { addClassToColumns, supplyValue } from "@/shared/components/Table";
 import { useEffect, useState } from "react";
 import Payments from "@/models/payment";
-import ModelFormDialog from "../ModelFormDialog";
-import { formatDate, formatNumber, formatTime } from "@/utils/formatNumber";
-import Card1 from "../Card1";
+import ModelFormDialog from "@/shared/components/ModelFormDialog";
+import { formatDate, formatNumber, formatTime } from "@/shared/utils/formatNumber";
+import Card1 from "@/shared/components/Card1";
 
 const HEADERS = ["Title", "Description", "Amount", "Date", "Time"];
 const select = (item, i) => {

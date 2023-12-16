@@ -1,4 +1,4 @@
-import { parseQuery } from "@/utils/createQuery";
+import { parseQuery } from "@/shared/utils/createQuery";
 
 const m = "Abcdefghijklmnopqrstuvwxyzyxwvutsrqponmlkjihgfedcba".repeat(5);
 

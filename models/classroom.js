@@ -1,11 +1,11 @@
-import { MODEL_ITEM_PREVIEW } from "@/components/ModelItemPreview";
+import { MODEL_ITEM_PREVIEW } from "@/shared/components/ModelItemPreview";
 import Admins, { Admin } from "./admin";
-import { Model, Item } from "./lib/model";
+import { Model, Item } from "@/shared/models/lib/model";
 import Students from "./student";
 import Teachers from "./teacher";
 import { Sessions } from "./session";
-import { CountedItem } from "./lib/counted_item";
-import { CountedModel } from "./lib/counted_model";
+import { CountedItem } from "@/shared/models/lib/counted_item";
+import { CountedModel } from "@/shared/models/lib/counted_model";
 import AssignedCourses from "./course_assignment";
 import { getCurrentSession } from "@/logic/website_data";
 

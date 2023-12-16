@@ -1,15 +1,15 @@
-import DashboardLayout from "@/components/DashboardLayout";
+import DashboardLayout from "@/shared/components/DashboardLayout";
 import { Element3 } from "iconsax-react";
-import UserRedirect from "../UserRedirect";
-import PageHeader from "../PageHeader";
+import UserRedirect from "@/shared/components/UserRedirect";
+import PageHeader from "@/components/PageHeader";
 import { Box, Button, CircularProgress, Typography } from "@mui/material";
 import Head from "next/head";
-import ModelForm from "../ModelForm";
+import ModelForm from "@/shared/components/ModelForm";
 import ActivationRequests from "@/models/activation_requests";
 import { useRef, useState } from "react";
-import { useUser } from "@/logic/auth";
-import { useQuery } from "@/models/lib/query";
-import { UserRoles } from "@/models/user_data";
+import { useUser } from "@/shared/logic/auth";
+import { useQuery } from "@/shared/models/lib/query";
+import { UserRoles } from "@/shared/models/user_data";
 const TABS = [
   {
     name: "Request Verification",

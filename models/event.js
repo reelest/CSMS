@@ -1,4 +1,4 @@
-import { Model, Item } from "./lib/model";
+import { Model, Item } from "@/shared/models/lib/model";
 
 export class Event extends Item {
   date = new Date();

@@ -1,8 +1,7 @@
-import { createSharedQuery } from "@/models/lib/query";
+import { createSharedQuery } from "@/shared/models/lib/query";
 import { WebsiteDataModel } from "@/models/website_data";
-import createSubscription from "@/utils/createSubscription";
-import { noop } from "@/utils/none";
-
+import createSubscription from "@/shared/utils/createSubscription";
+import { noop } from "@/shared/utils/none";
 /** @type {import("@/utils/createSubscription").Subscription<WebsiteData>} */
 export const [useWebsiteData, onWebsiteData, , getWebsiteData] =
   createSubscription((setData) => {
@@ -15,7 +14,7 @@ export const [useWebsiteData, onWebsiteData, , getWebsiteData] =
     });
   });
 
-onWebsiteData(noop);
+// onWebsiteData(noop); // Causes issues with rehydration on pages with useWebsiteData
 
 export const getCurrentSession = () => getWebsiteData()?.currentSession;
 /**

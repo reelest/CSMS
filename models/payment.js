@@ -1,5 +1,5 @@
-import { HiddenField } from "./lib/model_types";
-import { CountedModel } from "./lib/counted_model";
+import { HiddenField } from "@/shared/models/model_types";
+import { CountedModel } from "@/shared/models/lib/counted_model";
 import { Fee, Fees } from "./fees";
 
 export class Payment extends Fee {

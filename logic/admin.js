@@ -5,10 +5,10 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import isServerSide from "@/utils/is_server_side";
-import { UserRoles } from "@/models/user_data";
-import { mapRoleToUserModel } from "./user_data";
-import { firebaseConfig } from "./firebase_init";
+import isServerSide from "@/shared/utils/is_server_side";
+import { UserRoles } from "@/shared/models/user_data";
+import { mapRoleToUserModel } from "@/shared/logic/user_data";
+import { firebaseConfig } from "./firebase_config";
 
 // Initialize Firebase but only on client
 const app = isServerSide ? null : initializeApp(firebaseConfig, "admin");

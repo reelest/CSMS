@@ -1,6 +1,6 @@
-import { usePagedQuery, useQuery } from "@/models/lib/query";
-import { supplyValue } from "../Table";
-import ThemedTable from "../ThemedTable";
+import { usePagedQuery, useQuery } from "@/shared/models/lib/query";
+import { supplyValue } from "@/shared/components/Table";
+import ThemedTable from "@/shared/components/ThemedTable";
 import Registrations from "@/models/registration";
 
 export default function RegistrationsView() {

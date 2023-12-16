@@ -1,4 +1,4 @@
-import { Item, Model, USES_EXACT_IDS } from "./lib/model";
+import { Item, Model, USES_EXACT_IDS } from "@/shared/models/lib/model";
 import { Sessions } from "./session";
 
 export class WebsiteData extends Item {

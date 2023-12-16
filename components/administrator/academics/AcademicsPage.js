@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import PageHeader from "../../PageHeader";
+import PageHeader from "@/components/PageHeader";
 import { Tab, Tabs } from "@mui/material";
-import useQueryState from "@/utils/useQueryState";
+import useQueryState from "@/shared/utils/useQueryState";
 import SessionInfoPage from "./SessionInfoPage";
 import { createElement } from "react";
 

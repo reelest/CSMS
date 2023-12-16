@@ -1,5 +1,5 @@
-import { CountedModel } from "./lib/counted_model";
-import { CountedItem } from "./lib/counted_item";
+import { CountedModel } from "@/shared/models/lib/counted_model";
+import { CountedItem } from "@/shared/models/lib/counted_item";
 
 export class Fee extends CountedItem {
   title = "";

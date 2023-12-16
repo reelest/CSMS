@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import ModelTable from "@/components/ModelTable";
+import ModelTable from "@/shared/components/ModelTable";
 import AssignedCourses from "@/models/course_assignment";
 import { sessionId } from "@/models/session";
 import { useSelectedSession } from "@/components/SessionSelect";

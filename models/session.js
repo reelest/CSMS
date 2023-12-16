@@ -1,8 +1,8 @@
-import { CountedModel } from "./lib/counted_model";
-import { CountedItem } from "./lib/counted_item";
-import UpdateValue from "./lib/update_value";
-import { USES_EXACT_IDS } from "./lib/model";
-import { MODEL_ITEM_PREVIEW } from "@/components/ModelItemPreview";
+import { CountedModel } from "@/shared/models/lib/counted_model";
+import { CountedItem } from "@/shared/models/lib/counted_item";
+import UpdateValue from "@/shared/models/lib/update_value";
+import { USES_EXACT_IDS } from "@/shared/models/lib/model";
+import { MODEL_ITEM_PREVIEW } from "@/shared/components/ModelItemPreview";
 //A clone of the firebase authentication model is stored in firestore
 //in order to manage users with the uid as the key
 //Deleting users makes use of the firebase admin sdk

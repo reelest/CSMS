@@ -1,6 +1,6 @@
 import appLogoPng from "@/assets/app_logo.png";
 import Image from "next/image";
-import Template from "./Template";
+import Template from "@/shared/components/Template";
 export default function AppLogo({ size, ...props }) {
   return (
     <Template

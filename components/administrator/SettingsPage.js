@@ -1,7 +1,7 @@
 import { Box, Select, Typography } from "@mui/material";
-import PageHeader from "../PageHeader";
+import PageHeader from "@/components/PageHeader";
 import useWebsiteData from "@/logic/website_data";
-import ModelForm from "../ModelForm";
+import ModelForm from "@/shared/components/ModelForm";
 import { WebsiteDataModel } from "@/models/website_data";
 
 /*

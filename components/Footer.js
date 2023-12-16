@@ -1,4 +1,4 @@
-import { formatPhoneNumber } from "@/utils/formatNumber";
+import { formatPhoneNumber } from "@/shared/utils/formatNumber";
 import AppLogo from "./AppLogo";
 import useWebsiteData from "@/logic/website_data";
 import linkedInIcon from "@/assets/linkedIn.svg";

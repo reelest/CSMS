@@ -1,6 +1,6 @@
-import { noop } from "@/utils/none";
+import { noop } from "@/shared/utils/none";
 import Registrations from "@/models/registration";
-import ModelFormDialog from "../ModelFormDialog";
+import ModelFormDialog from "@/shared/components/ModelFormDialog";
 
 export default function RegistrationsForm({
   isOpen = false,

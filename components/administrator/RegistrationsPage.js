@@ -1,21 +1,21 @@
 import { Box, Typography, Button } from "@mui/material";
-import PageHeader from "../PageHeader";
+import PageHeader from "@/components/PageHeader";
 import { Add } from "iconsax-react";
-import SessionSelect, { useSelectedSession } from "../SessionSelect";
-import { usePagedQuery, useQuery } from "@/models/lib/query";
+import SessionSelect, { useSelectedSession } from "@/components/SessionSelect";
+import { usePagedQuery, useQuery } from "@/shared/models/lib/query";
 import Registrations, { Registration } from "@/models/registration";
-import ThemedTable from "../ThemedTable";
+import ThemedTable from "@/shared/components/ThemedTable";
 import {
   TableButton,
   addClassToColumns,
   addHeaderClass,
   supplyValue,
-} from "../Table";
+} from "@/shared/components/Table";
 import { useEffect, useMemo, useState } from "react";
 import RegistrationsForm from "./RegistrationsForm";
 import TrashIcon from "@heroicons/react/20/solid/TrashIcon";
-import ModelDataView from "../ModelDataView";
-import ModelTable from "../ModelTable";
+import ModelDataView from "@/shared/components/ModelDataView";
+import ModelTable from "@/shared/components/ModelTable";
 import { sessionId } from "@/models/session";
 
 export default function RegistrationsPage() {

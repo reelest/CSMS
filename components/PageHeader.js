@@ -7,17 +7,16 @@ import {
   Hidden,
   IconButton,
 } from "@mui/material";
-import { SearchInput } from "./SearchInput";
-import Spacer from "./Spacer";
+import { SearchInput } from "@/shared/components/SearchInput";
+import Spacer from "@/shared/components/Spacer";
 import { HambergerMenu, Menu } from "iconsax-react";
-import { useUser } from "@/logic/auth";
-import useBreakpoints from "@/utils/useBreakpoints";
-import { setSidebar } from "./Sidebar";
-import useUserData from "@/logic/user_data";
-import sentenceCase from "@/utils/sentenceCase";
+import { useUser } from "@/shared/logic/auth";
+import useBreakpoints from "@/shared/utils/useBreakpoints";
+import { setSidebar } from "@/shared/components/Sidebar";
+import useUserData from "@/shared/logic/user_data";
+import sentenceCase from "@/shared/utils/sentenceCase";
 export default function PageHeader({ title, onSearch }) {
   const user = useUserData();
-  const p = useBreakpoints();
   return (
     <Paper
       className="flex max-sm:flex-wrap px-4 sm:px-8 h-15 items-center justify-end py-2"

@@ -1,8 +1,8 @@
-import { usePagedQuery, useQuery } from "@/models/lib/query";
-import ThemedTable from "../ThemedTable";
+import { usePagedQuery, useQuery } from "@/shared/models/lib/query";
+import ThemedTable from "@/shared/components/ThemedTable";
 import Payments from "@/models/payment";
-import { supplyValue } from "../Table";
-import { formatDate, formatNumber, formatTime } from "@/utils/formatNumber";
+import { supplyValue } from "@/shared/components/Table";
+import { formatDate, formatNumber, formatTime } from "@/shared/utils/formatNumber";
 
 export default function StudentPaymentsView() {
   const { data: payments, pager } = usePagedQuery(

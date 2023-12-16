@@ -1,11 +1,11 @@
-import uniq from "@/utils/uniq";
+import uniq from "@/shared/utils/uniq";
 import Courses from "./course";
-import { CountedItem } from "./lib/counted_item";
-import { ItemDoesNotExist, checkError } from "./lib/errors";
-import { Item, Model } from "./lib/model";
-import UpdateValue from "./lib/update_value";
+import { CountedItem } from "@/shared/models/lib/counted_item";
+import { ItemDoesNotExist, checkError } from "@/shared/models/lib/errors";
+import { Item, Model } from "@/shared/models/lib/model";
+import UpdateValue from "@/shared/models/lib/update_value";
 import { range } from "d3";
-import { CountedModel } from "./lib/counted_model";
+import { CountedModel } from "@/shared/models/lib/counted_model";
 import { Sessions } from "./session";
 import { getCurrentSession } from "@/logic/website_data";
 /**

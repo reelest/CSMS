@@ -1,11 +1,11 @@
-import DashboardLayout from "@/components/DashboardLayout";
+import DashboardLayout from "@/shared/components/DashboardLayout";
 import { Element3, Teacher, WalletMoney } from "iconsax-react";
 import StudentTransactions from "./StudentTransactionsPage";
 import Head from "next/head";
-import UserRedirect from "../UserRedirect";
+import UserRedirect from "@/shared/components/UserRedirect";
 import OverviewPage from "./OverviewPage";
 import StudentAcademics from "./StudentAcademicsPage";
-import DEMO from "../DEMO";
+import DEMO from "@/components/DEMO";
 
 const TABS = [
   {

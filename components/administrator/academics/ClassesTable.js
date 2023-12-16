@@ -1,5 +1,5 @@
 import ClassRooms from "@/models/classroom";
-import ModelTable from "@/components/ModelTable";
+import ModelTable from "@/shared/components/ModelTable";
 import { useSelectedSession } from "@/components/SessionSelect";
 import { useMemo } from "react";
 import { sessionId } from "@/models/session";

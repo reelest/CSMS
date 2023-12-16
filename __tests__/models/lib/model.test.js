@@ -1,4 +1,4 @@
-import { Model } from "@/models/lib/model";
+import { Model } from "@/shared/models/lib/model";
 import { setDoc } from "firebase/firestore";
 const TestModel = new Model("test");
 

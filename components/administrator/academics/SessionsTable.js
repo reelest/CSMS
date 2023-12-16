@@ -1,8 +1,8 @@
 import { Sessions, sessionId } from "@/models/session";
 import { useState } from "react";
 import { Modal, Paper } from "@mui/material";
-import Form, { FormField, FormSubmit } from "@/components/Form";
-import ModelTable from "@/components/ModelTable";
+import Form, { FormField, FormSubmit } from "@/shared/components/Form";
+import ModelTable from "@/shared/components/ModelTable";
 
 export default function SessionsTable() {
   const [formCreationRequest, setFormCreationRequest] = useState(null);

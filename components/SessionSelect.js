@@ -1,4 +1,4 @@
-import createSubscription from "@/utils/createSubscription";
+import createSubscription from "@/shared/utils/createSubscription";
 import { MenuItem, Select, Typography } from "@mui/material";
 import { onNewSessions, useSessions } from "@/logic/session";
 

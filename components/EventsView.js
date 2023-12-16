@@ -1,4 +1,4 @@
-import sentenceCase from "@/utils/sentenceCase";
+import sentenceCase from "@/shared/utils/sentenceCase";
 
 import {
   default as Table,
@@ -6,15 +6,15 @@ import {
   addHeaderClass,
   addClassToColumns,
   supplyValue,
-} from "@/components/Table";
-import styles from "./events_view.module.css";
+} from "@/shared/components/Table";
+import styles from "@/shared/components/events_view.module.css";
 import { range } from "d3";
-import { formatTime } from "@/utils/formatNumber";
-import LoaderAnimation from "@/components/LoaderAnimation";
-import { daysToMs } from "@/utils/time_utils";
-import { useQuery } from "@/models/lib/query";
+import { formatTime } from "@/shared/utils/formatNumber";
+import LoaderAnimation from "@/shared/components/LoaderAnimation";
+import { daysToMs } from "@/shared/utils/time_utils";
+import { useQuery } from "@/shared/models/lib/query";
 import Events from "@/models/event";
-import Card1 from "./Card1";
+import Card1 from "@/shared/components/Card1";
 import { Box, Divider, Typography } from "@mui/material";
 
 const months = [

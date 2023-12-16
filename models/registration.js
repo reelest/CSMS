@@ -1,6 +1,6 @@
-import { CountedModel } from "./lib/counted_model";
-import { CountedItem } from "./lib/counted_item";
-import { Class, Country, Gender } from "./lib/model_types";
+import { CountedModel } from "@/shared/models/lib/counted_model";
+import { CountedItem } from "@/shared/models/lib/counted_item";
+import { Class, Country, Gender } from "@/shared/models/model_types";
 import { Sessions } from "./session";
 import { getCurrentSession } from "@/logic/website_data";
 export class Registration extends CountedItem {

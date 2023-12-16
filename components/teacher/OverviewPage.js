@@ -1,18 +1,18 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import PageHeader from "../PageHeader";
-import Card2, { Card2Wrapper } from "../Card2";
+import PageHeader from "@/components/PageHeader";
+import Card2, { Card2Wrapper } from "@/shared/components/Card2";
 
 import { ArchiveBox } from "iconsax-react";
-import { useQuery } from "@/models/lib/query";
+import { useQuery } from "@/shared/models/lib/query";
 import Students from "@/models/student";
 import Teachers from "@/models/teacher";
 import Parents from "@/models/parent";
 import { Hidden } from "@mui/material";
-import PieChart from "../PieChart";
-import EventsView from "../EventsView";
+import PieChart from "@/shared/components/PieChart";
+import EventsView from "@/components/EventsView";
 import StudentPaymentsView from "./StudentPaymentsView";
-import SessionSelect from "../SessionSelect";
+import SessionSelect from "@/components/SessionSelect";
 
 const useCount = (Model) => {
   return useQuery(() => Model.counter.asQuery(), [], {

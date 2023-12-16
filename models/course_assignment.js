@@ -1,5 +1,5 @@
-import { Model } from "./lib/model";
-import { CountedItem } from "./lib/counted_item";
+import { Model } from "@/shared/models/lib/model";
+import { CountedItem } from "@/shared/models/lib/counted_item";
 
 export class AssignedCourse extends CountedItem {
   teacherId = "";

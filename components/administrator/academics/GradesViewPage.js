@@ -1,11 +1,11 @@
-import SessionSelect from "@/componenets/SessionSelect";
-import Form, { FormSelect } from "@/components/Form";
-import ModelFormRefField from "@/components/ModelFormRefField";
-import ModelTable from "@/components/ModelTable";
+import SessionSelect from "@/components/SessionSelect";
+import Form, { FormSelect } from "@/shared/components/Form";
+import ModelFormRefField from "@/shared/components/ModelFormRefField";
+import ModelTable from "@/shared/components/ModelTable";
 import { useSelectedSession } from "@/components/SessionSelect";
 import ClassRooms from "@/models/classroom";
 import Grades, { Grade } from "@/models/grade";
-import { useQuery } from "@/models/lib/query";
+import { useQuery } from "@/shared/models/lib/query";
 import { Typography } from "@mui/material";
 import { useMemo, useState } from "react";
 export default function GradesViewPage() {

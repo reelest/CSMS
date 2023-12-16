@@ -1,6 +1,6 @@
-import { CountedModel } from "./lib/counted_model";
-import { HiddenField } from "./lib/model_types";
-import { UserMeta, UserData } from "./user_data";
+import { CountedModel } from "@/shared/models/lib/counted_model";
+import { HiddenField } from "@/shared/models/model_types";
+import { UserMeta, UserData } from "@/shared/models/user_data";
 
 export class Student extends UserData {
   bloodGroup = "";
