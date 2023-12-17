@@ -1,7 +1,7 @@
 {
-  "name": "mouoa",
-  "version": "1.0.0",
-  "description": "Micheal Okpara University Of Agriculture - Drug Prescription System",
+  "name": "csms",
+  "version": "0.1.0",
+  "description": "Fancy Next.js app",
   "scripts": {
     "dev": "next",
     "rules": "node ./scripts/packer.mjs && firebase deploy --only firestore,storage",

@@ -11,5 +11,5 @@ addUserModel("student", Students);
 addUserModel("admin", Admins);
 addUserModel("teacher", Teachers);
 setAppLogo(
-  <AppLogo className="block mx-auto relative right-2 pt-4 pb-8 h-20 mt-8 mb-4 w-auto px-4" />
+  <AppLogo className="block mx-auto relative right-2 pt-4 pb-8 h-10 mt-8 mb-4 w-100 px-4" />
 );
