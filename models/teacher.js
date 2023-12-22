@@ -1,4 +1,3 @@
-import AssignedCourses from "./course_assignment";
 import { CountedModel } from "@/shared/models/lib/counted_model";
 import { UserMeta, UserData } from "@/shared/models/user_data";
 
@@ -18,5 +17,4 @@ const Teachers = new CountedModel("teachers", Teacher, {
     },
   },
 });
-Teachers.hasOneOrMore(AssignedCourses, "teacherId");
 export default Teachers;

@@ -2,31 +2,33 @@ import { usePagedQuery, useQuery } from "@/shared/models/lib/query";
 import ThemedTable from "@/shared/components/ThemedTable";
 import Payments from "@/models/payment";
 import { supplyValue } from "@/shared/components/Table";
-import { formatDate, formatNumber, formatTime } from "@/shared/utils/formatNumber";
+import {
+  formatDate,
+  formatNumber,
+  formatTime,
+} from "@/shared/utils/formatNumber";
+import ModelTable from "@/shared/components/ModelTable";
+import { useMemo } from "react";
 
 export default function PaymentsView() {
-  const { data: payments, pager } = usePagedQuery(
-    () => Payments.all().pageSize(10),
-    [],
-    { watch: true }
-  );
+  const query = useMemo(() => Payments.all().pageSize(10), []);
   return (
-    <ThemedTable
-      title="Payments"
-      headers={["Name", "Description", "Amount", "Date", "Time"]}
-      sx={{ width: "50rem", flexGrow: 1, maxWidth: "100%" }}
-      results={payments}
-      className="my-6 mx-2"
-      pager={pager}
+    <ModelTable
+      Model={Payments}
+      Query={query}
+      className="my-6 p-0"
+      allowDelete={false}
+      allowEdit={false}
+      allowCreate={false}
+      sx={{ width: "30rem", flexGrow: 1, maxWidth: "100%" }}
+      props={["title", "description", "amounT", "date", "time"]}
       renderHooks={[
-        supplyValue((row, col) => {
+        supplyValue((row, col, payments) => {
+          console.log({ payments, row, col });
+          if (!Array.isArray(payments)) return;
           const item = payments[row];
           if (!item) return;
           switch (col) {
-            case 0:
-              return item.title;
-            case 1:
-              return item.description;
             case 2:
               return "\u20A6" + formatNumber(item.amount);
             case 3:

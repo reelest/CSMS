@@ -1,23 +1,15 @@
-import {
-  collection,
-  deleteDoc,
-  deleteField,
-  doc,
-  setDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { DB } from "@/shared/logic/firebase_init";
 import { firestoreNS, firestore } from "@/shared/logic/firebase_init";
 import { InvalidState, ItemDoesNotExist, checkError } from "./errors";
 import getModelTypeInfo from "./model_type_info";
-import pick from "@/shared/utils/pick";
 import { DocumentQueryCursor, QueryCursor } from "./query";
 import Txn from "./transaction";
 import isPureObject from "@/shared/utils/isPureObject";
 import typeOf from "@/shared/utils/typeof";
 import hasProp from "@/shared/utils/hasProp";
 import { isUpdateValue } from "./update_value";
-import { None } from "@/shared/utils/none";
 import { getItemFromStore } from "./item_store";
+const { collection, deleteDoc, deleteField, doc, setDoc, updateDoc } = DB;
 /**
  * (new|(?<!Model )extends) \w*Model\b
  */

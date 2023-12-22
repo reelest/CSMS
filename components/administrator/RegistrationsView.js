@@ -2,35 +2,18 @@ import { usePagedQuery, useQuery } from "@/shared/models/lib/query";
 import { supplyValue } from "@/shared/components/Table";
 import ThemedTable from "@/shared/components/ThemedTable";
 import Registrations from "@/models/registration";
+import ModelTable from "@/shared/components/ModelTable";
 
 export default function RegistrationsView() {
-  const { data: registrations, pager } = usePagedQuery(
-    () => Registrations.all().pageSize(10),
-    [],
-    { watch: true }
-  );
   return (
-    <ThemedTable
-      title="Registrations"
-      headers={["Name", "Entrance Class", "Gender"]}
-      results={registrations}
-      className="my-6 h-auto mx-2"
-      pager={pager}
-      renderHooks={[
-        supplyValue((row, col) => {
-          const item = registrations[row];
-          if (!item) return;
-          switch (col) {
-            case 0:
-              return item.getName();
-            case 1:
-              return item.getClass();
-            case 2:
-              return item.gender;
-          }
-        }),
-      ]}
-      sx={{ width: "32rem", flexGrow: 1, maxWidth: "64rem" }}
+    <ModelTable
+      allowCreate={false}
+      allowEdit={false}
+      allowDelete={false}
+      Model={Registrations}
+      props={["name", "entranceClass", "gender"]}
+      className="my-6 h-auto p-0"
+      sx={{ width: "24rem", flexGrow: 1, maxWidth: "64rem" }}
     />
   );
 }

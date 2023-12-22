@@ -77,16 +77,14 @@ function ThemedTable({
             Boolean
           ),
           addHeaderClass(
-            "first:pl-8 pr-4 last:pr-0 font-normal text-gray-400 whitespace-nowrap pb-2"
+            "first:pl-4 pr-4 last:pr-0 font-normal text-gray-400 whitespace-nowrap pb-2 last:pr-4"
           ),
-          addClassToColumns(
-            "text-gray-800 first:pl-8 pr-8 pt-1 pb-2 first:rounded-l last:rounded-r"
-          ),
+          addClassToColumns("first:pl-4 last:pr-4 pr-8 pt-1"),
           ...renderHooks,
         ]}
       />
 
-      <div className="flex flex-wrap items-center justify-center mt-12">
+      <div className="flex flex-wrap items-center justify-center mt-4">
         <Spacer />
         <Typography variant="body2" sx={{ mr: 4 }}>
           Total

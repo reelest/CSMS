@@ -15,24 +15,25 @@ export default function Card2({ icon: Icon, color = "white", label, value }) {
         maxHeight: "10rem",
       }}
     >
-      <div className="flex flex-col p-4 pl-6  pb-2">
-        <Box
-          sx={{
-            backgroundColor: "primary.dark",
-            p: 1,
-            borderRadius: "50%",
-            width: 24,
-            mb: 1,
-          }}
-        >
-          <Icon size={16} color="white" className="block" />
-        </Box>
+      <Box
+        sx={{
+          p: 2,
+          borderRadius: "50%",
+          backgroundColor: "primary.main",
+          width: 32,
+          mb: 1,
+          ml: 4,
+        }}
+      >
+        <Icon size={18} className="block text-white" />
+      </Box>
+      <div className="flex flex-col p-4 pb-2 h-full">
         <Spacer />
         <Typography variant="body2">
           {label ?? <Skeleton width={200} />}
         </Typography>
         <Spacer />
-        <Typography variant="h4" as="h3" sx={{ my: 1 }}>
+        <Typography variant="h3" as="span" sx={{ mt: 2, mb: 1 }}>
           {value ?? <Skeleton width="100%" />}
         </Typography>
       </div>

@@ -9,12 +9,12 @@ import useIterator from "@/shared/utils/useIterator";
 import { search } from "@/shared/logic/search";
 import createQuery from "@/shared/utils/createQuery";
 import { useDebounce } from "react-use";
-import { IndexEntry } from "@/shared/models/search_index";
+import { ForwardIndexItem } from "@/shared/models/search_index";
 import { Item } from "@/shared/models/lib/model";
 import pick from "@/shared/utils/pick";
 import notIn from "@/shared/utils/notIn";
 export const _searchValue = (e) =>
-  e instanceof IndexEntry
+  e instanceof ForwardIndexItem
     ? e.tokens
     : e instanceof Item && e._isLoaded && e.model().Meta[MODEL_ITEM_PREVIEW]
     ? Object.values(e.model().Meta[MODEL_ITEM_PREVIEW](e)).join(" ")
@@ -23,7 +23,11 @@ export const _searchValue = (e) =>
     : "";
 
 export const _id = (e) =>
-  e instanceof IndexEntry ? e.getItem().id : e instanceof Item ? e.id() : e;
+  e instanceof ForwardIndexItem
+    ? e.getItem().id
+    : e instanceof Item
+    ? e.id()
+    : e;
 
 export function SearchInput() {
   const [open, setOpen] = useState(false);
@@ -107,14 +111,17 @@ export function SearchInput() {
           value={filterText}
           {...{
             ...params.InputProps,
-            startAdornment: (
-              <Box as={SearchIcon} size={20} className="mr-3 text-inherit" />
-            ),
+
             endAdornment: (
               <>
                 {loading ? (
                   <CircularProgress color="inherit" size={20} />
                 ) : null}
+                <Box
+                  as={SearchIcon}
+                  size={20}
+                  className="mr-3 text-inherit text-disabledOnPrimaryDark"
+                />
                 {params.InputProps.endAdornment}
               </>
             ),

@@ -8,7 +8,9 @@ import {
   useState,
 } from "react";
 import useFormHandler from "@/shared/utils/useFormHandler";
-import useValidation, { formValidator } from "@/shared/utils/useBrowserFormValidation";
+import useValidation, {
+  formValidator,
+} from "@/shared/utils/useBrowserFormValidation";
 import TextField from "@mui/material/TextField";
 import Checkbox from "@mui/material/Checkbox";
 import ThemedButton from "@mui/material/Button";
@@ -41,7 +43,7 @@ import useStable from "@/shared/utils/useStable";
 /**
  * @type {React.Context<FormParams>}
  */
-const FormContext = createContext();
+export const FormContext = createContext();
 
 export default function Form({
   children,
@@ -88,8 +90,8 @@ export default function Form({
     /*ctx && formId === ctx.formId ? ctx :*/ _ctx;
   onChange = useStable(onChange);
   useEffect(() => {
-    onChange?.(handler.data);
-  }, [handler.data, onChange]);
+    onChange?.(handler.data, handler);
+  }, [handler.data, onChange, handler]);
   return (
     <Template
       as="form"

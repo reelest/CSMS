@@ -1,6 +1,6 @@
 import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Add, Edit, Trash, Warning2 } from "iconsax-react";
+import { Add, AddCircle, Edit, Trash, Warning2 } from "iconsax-react";
 import { useQuery } from "@/shared/models/lib/query";
 import { singular } from "@/shared/utils/plural";
 import sentenceCase from "@/shared/utils/sentenceCase";
@@ -32,6 +32,10 @@ function ModelTableInner({
   onCreate,
   renderHooks = [],
   deps = [],
+  className,
+  sx,
+  noMargin = false,
+  formProps = null,
 }) {
   const { data: items, pager } = useQuery(
     () => Query?.pageSize?.(10),
@@ -71,10 +75,19 @@ function ModelTableInner({
           edit={item}
           onClose={() => setFormVisible(false)}
           model={Model}
+          {...(formProps || {})}
         />
       ) : null}
 
-      <Box className="px-4 sm:px-8 py-8">
+      <Box
+        className={className}
+        sx={{
+          px: noMargin ? 0 : { xs: 4, sm: 8 },
+          mx: noMargin ? -1 : 0,
+          py: 8,
+          ...sx,
+        }}
+      >
         <div className="flex flex-wrap justify-between mx-2">
           <Typography variant="h6" as="h2">
             {pluralTitle}
@@ -88,7 +101,8 @@ function ModelTableInner({
               onClick={createItem}
               disabled={!Query}
             >
-              {addActionTitle} <Add size={32} className="ml-2" />
+              <AddCircle size={20} className="mr-2 -ml-2" />
+              {addActionTitle}
             </Button>
           </div>
         ) : null}
@@ -112,12 +126,11 @@ function ModelTableInner({
           }}
           renderHooks={[
             addHeaderClass("pr-4"),
-            addClassToColumns("w-0", [props.length, props.length + 1]),
+            addClassToColumns("w-0 pr-0", [props.length, props.length + 1]),
             supplyModelValues(props),
             supplyValue((row, col, data) => {
               if (!data) return;
-              col -= props.length;
-              switch (actions[col]) {
+              switch (actions[col - props.length]) {
                 case "e":
                   return (
                     <div className="print:hidden">
@@ -157,6 +170,11 @@ function ModelTableInner({
   );
 }
 
+/**
+ *
+ * @param {Parameters<typeof ModelTableInner>[0]} props
+ * @returns
+ */
 export default function ModelTable(props) {
   return (
     <ErrorBoundary

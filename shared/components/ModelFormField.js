@@ -119,7 +119,12 @@ function createFormField(name, meta, { disabled } = {}) {
         />
       );
     case "boolean":
-      return <FormField {...commonProps} type="checkbox" />;
+      return (
+        <FormField
+          {...{ ...commonProps, sx: { ...commonProps.sx, flexGrow: 0 } }}
+          type="checkbox"
+        />
+      );
     case "date":
     case "datetime":
     case "time":

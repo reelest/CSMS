@@ -1,10 +1,6 @@
-import {
-  increment,
-  arrayUnion,
-  arrayRemove,
-  FieldValue,
-} from "firebase/firestore";
-
+import { DB, firestore } from "@/shared/logic/firebase_init";
+console.log({ DB, firestore: firestore });
+const { increment, arrayUnion, arrayRemove, FieldValue } = DB;
 export default class UpdateValue {
   // resolve() {
   //   throw new UnimplementedError("resolve is unimplemented");

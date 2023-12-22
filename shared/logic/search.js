@@ -1,7 +1,7 @@
 import { ItemDoesNotExist, checkError } from "@/shared/models/lib/errors";
 import {
-  SearchIndex,
-  SearchTags,
+  ForwardIndex,
+  ReverseIndex,
   getIndex,
 } from "@/shared/models/search_index";
 import { parseQuery } from "@/shared/utils/createQuery";
@@ -18,7 +18,7 @@ export async function* getSearchResults(tokens) {
     if (cache.has(key)) {
       item = cache.get(key);
     } else {
-      item = SearchTags.item(key);
+      item = ReverseIndex.item(key);
       cache.set(key, item);
     }
     if (!item._isLoaded) {
@@ -58,7 +58,7 @@ export async function* search(text, filters, limit = 10) {
       results.push(
         ...items
           .filter((e) => !unique.has(e) && unique.add(e))
-          .map((e) => SearchIndex.item(e).getItem())
+          .map((e) => ForwardIndex.item(e).getItem())
           .filter((e) =>
             filters.length
               ? true

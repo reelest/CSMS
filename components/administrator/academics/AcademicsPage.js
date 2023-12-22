@@ -5,6 +5,7 @@ import { Tab, Tabs } from "@mui/material";
 import useQueryState from "@/shared/utils/useQueryState";
 import SessionInfoPage from "./SessionInfoPage";
 import { createElement } from "react";
+import SessionSelect from "@/components/SessionSelect";
 
 const TABS = [
   {
@@ -36,22 +37,29 @@ export default function AcademicsPage() {
             Academics
           </Typography>
         </div>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <Tabs
-            value={activeTab}
-            onChange={(e, v) => setActiveTab(v)}
-            aria-label="basic tabs example"
+
+        <div className="flex items-end">
+          <Box
+            sx={{ borderBottom: 1, borderColor: "divider", flexGrow: 1, mr: 8 }}
           >
-            {TABS.map((e, i) => (
-              <Tab
-                label={e.header}
-                key={e.name}
-                {...a11yProps(i)}
-                value={e.name}
-              />
-            ))}
-          </Tabs>
-        </Box>
+            <Tabs
+              value={activeTab}
+              onChange={(e, v) => setActiveTab(v)}
+              aria-label="basic tabs example"
+            >
+              {TABS.map((e, i) => (
+                <Tab
+                  label={e.header}
+                  key={e.name}
+                  {...a11yProps(i)}
+                  value={e.name}
+                />
+              ))}
+            </Tabs>
+          </Box>
+          <SessionSelect />
+        </div>
+
         {createElement(
           TABS.find((e) => e.name === activeTab).component ?? "div"
         )}

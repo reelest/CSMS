@@ -12,7 +12,6 @@ import {
 } from "@mui/material";
 import createSubscription from "@/shared/utils/createSubscription";
 import { noop } from "@/shared/utils/none";
-import delay from "@/shared/utils/delay";
 import { useEffect } from "react";
 import useQueryState from "@/shared/utils/useQueryState";
 
@@ -22,13 +21,14 @@ export function useActiveTab(tabs) {
   return useQueryState("tab", tabs[0]?.name?.toLowerCase?.())[0];
 }
 
-let appLogo = null;
-export function setAppLogo(logo) {
-  appLogo = logo;
-}
+export const [useAppLogo, , setAppLogo] = createSubscription(
+  noop,
+  <Typography>No Logo</Typography>
+);
 export default function Sidebar({ children, isStatic = false, tabs = [] }) {
   const selected = useActiveTab(tabs);
   const isOpen = useSidebar();
+  const appLogo = useAppLogo();
   useEffect(() => setSidebar(false), [selected]);
   return (
     <SwipeableDrawer
@@ -46,7 +46,7 @@ export default function Sidebar({ children, isStatic = false, tabs = [] }) {
     >
       <nav className="text-white w-72 flex-shrink-0 pt-4 pb-8 flex flex-col justify-start h-full">
         {appLogo}
-        <div className="flex flex-col flex-grow overflow-auto pl-8 pr-6">
+        <div className="flex flex-col flex-grow overflow-auto pl-6 pr-6">
           {tabs.map(({ icon, name, id = name.toLowerCase() }) =>
             id === "settings" ? null : (
               <TabLink
@@ -101,16 +101,15 @@ const TabLink = ({
     <Template
       as={Link}
       props={props}
-      className={`block text-left whitespace-nowrap w-full`}
+      className={`block text-left whitespace-nowrap w-full rounded`}
       sx={{
-        marginTop: "0.375rem",
-        marginBottom: "0.375rem",
+        marginTop: "0.125rem",
+        marginBottom: "0.125rem",
         py: 2,
         px: 4,
         textAlign: "left",
         display: "block",
         textDecoration: "none",
-        borderRadius: "0.75rem",
         backgroundColor: isSelected ? "white" : "",
         color: isActivated
           ? "white"
@@ -125,7 +124,7 @@ const TabLink = ({
       <Typography>
         <Box
           as={Icon}
-          size={24}
+          size={20}
           sx={{
             color: isActivated
               ? "white"

@@ -17,9 +17,15 @@ export default function CoursesTable() {
     <ModelTable
       Model={AssignedCourses}
       Query={query}
+      noMargin
       deps={[query]}
       addActionTitle="Assign Teacher"
       pluralTitle="Teacher Assignments"
+      formProps={{
+        onChange(data) {
+          console.log("change", data);
+        },
+      }}
     />
   );
 }

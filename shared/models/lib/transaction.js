@@ -1,7 +1,8 @@
 import { firestore } from "@/shared/logic/firebase_init";
-import { refEqual, runTransaction, writeBatch } from "firebase/firestore";
+import { DB } from "@/shared/logic/firebase_init";
 import { InvalidState } from "./errors";
 import notIn from "@/shared/utils/notIn";
+const { refEqual, runTransaction, writeBatch } = DB;
 
 const promise = () => {
   let r, j;

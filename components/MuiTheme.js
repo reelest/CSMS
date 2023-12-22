@@ -21,6 +21,14 @@ const MuiTheme = createTheme({
         LinkComponent: LinkBehavior,
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: () => ({
+          lineHeight: "normal",
+          textTransform: "capitalize",
+        }),
+      },
+    },
     MuiFilledInput: {
       styleOverrides: {
         root: ({ theme }) => ({
@@ -61,36 +69,38 @@ const MuiTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: '"Poppins", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Inter", "Helvetica", "Arial", sans-serif',
+    fontSize: (16 * 14) / 16,
+
     h1: {
-      fontFamily: '"Poppins", sans-serif',
-      fontWeight: "bold",
-      fontSize: "4.214rem",
-    },
-    h2: {
       fontFamily: '"Poppins", sans-serif',
       fontWeight: "bold",
       fontSize: "3.161rem",
     },
-    h3: {
+    h2: {
       fontFamily: '"Poppins", sans-serif',
       fontWeight: "bold",
       fontSize: "2.37rem",
     },
-    h4: {
+    h3: {
       fontFamily: '"Poppins", sans-serif',
       fontWeight: "bold",
       fontSize: "1.78rem",
     },
-    h5: {
+    h4: {
       fontFamily: '"Poppins", sans-serif',
       fontWeight: "bold",
       fontSize: "1.33333333rem",
     },
-    h6: {
+    h5: {
       fontFamily: '"Poppins", sans-serif',
       fontWeight: "bold",
       fontSize: "1.1666666rem",
+    },
+    h6: {
+      fontFamily: '"Poppins", sans-serif',
+      fontWeight: "bold",
+      fontSize: "1rem",
     },
   },
   shape: {

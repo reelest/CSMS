@@ -3,12 +3,12 @@ import { CountedItem } from "./lib/counted_item";
 import UpdateValue from "./lib/update_value";
 import notIn from "@/shared/utils/notIn";
 
-class SearchTag extends Item {
+class ReverseIndexItem extends Item {
   static strictKeys = false;
 }
-export const SearchTags = new Model("search_tags", SearchTag);
+export const ReverseIndex = new Model("search_tags", ReverseIndexItem);
 
-export class IndexEntry extends CountedItem {
+export class ForwardIndexItem extends CountedItem {
   tokens = [];
   getItem() {
     const id = this.id().split("^").pop();
@@ -54,7 +54,7 @@ function updateTokens(tokens, id, txn, method) {
     for (let token in m[index]) {
       m[index][token] = method(...m[index][token]);
     }
-    SearchTags.item(index, true).set(m[index], txn);
+    ReverseIndex.item(index, true).set(m[index], txn);
   }
 }
 
@@ -63,6 +63,6 @@ export function getIndex(token) {
   return token.slice(0, INDEX_SIZE);
 }
 
-export const SearchIndex = new Model("search_index", IndexEntry, {
+export const ForwardIndex = new Model("search_index", ForwardIndexItem, {
   [USES_EXACT_IDS]: true,
 });

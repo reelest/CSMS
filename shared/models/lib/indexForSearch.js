@@ -10,7 +10,7 @@ const _id = (item) => item.uniqueName().replace(/\//g, "^");
 const searchIndexProps = Symbol("searchIndexer");
 async function updateInTxn(txn, item, newState) {
   const SearchIndex = (await import("@/shared/models/search_index"))
-    .SearchIndex;
+    .ForwardIndex;
   if (item[searchIndexProps]) {
     const { props, indexer } = item[searchIndexProps];
     if (props.some((e) => item.didUpdate(e))) {
@@ -32,7 +32,7 @@ async function updateInTxn(txn, item, newState) {
 }
 async function deleteInTxn(txn, item) {
   const SearchIndex = (await import("@/shared/models/search_index"))
-    .SearchIndex;
+    .ForwardIndex;
   if (item[searchIndexProps]) return SearchIndex.item(_id(item)).delete(txn);
 }
 

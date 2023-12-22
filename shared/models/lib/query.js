@@ -1,4 +1,14 @@
-import {
+import { DB } from "@/shared/logic/firebase_init";
+import { useEffect, useRef, useState } from "react";
+import createSubscription from "@/shared/utils/createSubscription";
+import useStable from "@/shared/utils/useStable";
+import { noop } from "@/shared/utils/none";
+import { noFirestore } from "./model";
+import { range } from "d3";
+import usePager from "@/shared/utils/usePager";
+import { InvalidParameters, InvalidState } from "./errors";
+import pool from "@/shared/utils/request_pool";
+const {
   getDoc,
   where,
   query,
@@ -12,17 +22,7 @@ import {
   getCountFromServer,
   documentId,
   queryEqual,
-} from "firebase/firestore";
-import { useEffect, useRef, useState } from "react";
-import createSubscription from "@/shared/utils/createSubscription";
-import useStable from "@/shared/utils/useStable";
-import { noop } from "@/shared/utils/none";
-import { Item, noFirestore } from "./model";
-import { range } from "d3";
-import usePager from "@/shared/utils/usePager";
-import useLogger from "@/shared/utils/useLogger";
-import { InvalidParameters, InvalidState } from "./errors";
-import pool from "@/shared/utils/request_pool";
+} = DB;
 
 const _getDoc = pool(getDoc, queryEqual);
 const _getDocs = pool(getDocs, queryEqual);
@@ -429,7 +429,6 @@ export class QueryCursor {
           query(
             this.model._ref,
             ...this._filters,
-            ...this._ordering,
             ...(isNaN(max) ? [] : [max(Number(max) + 1)])
           )
         )

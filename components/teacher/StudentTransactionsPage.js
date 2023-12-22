@@ -3,11 +3,18 @@ import PageHeader from "@/components/PageHeader";
 import { Add, Money2 } from "iconsax-react";
 import { useQuery } from "@/shared/models/lib/query";
 import ThemedTable from "@/shared/components/ThemedTable";
-import Table, { addClassToColumns, supplyValue } from "@/shared/components/Table";
+import Table, {
+  addClassToColumns,
+  supplyValue,
+} from "@/shared/components/Table";
 import { useEffect, useState } from "react";
 import Payments from "@/models/payment";
 import ModelFormDialog from "@/shared/components/ModelFormDialog";
-import { formatDate, formatNumber, formatTime } from "@/shared/utils/formatNumber";
+import {
+  formatDate,
+  formatNumber,
+  formatTime,
+} from "@/shared/utils/formatNumber";
 import Card1 from "@/shared/components/Card1";
 
 const HEADERS = ["Title", "Description", "Amount", "Date", "Time"];
@@ -71,7 +78,7 @@ export default function StudentTransactionsPage() {
             disabled
             // onClick={() => setFormCreateVisible(true)}
           >
-            Make Payment <Money2 size={32} className="ml-2" />
+            Make Payment <Money2 size={20} className="ml-2" />
           </Button>
         </div>
         <ThemedTable

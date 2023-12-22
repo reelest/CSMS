@@ -1,10 +1,10 @@
-import { increment } from "firebase/firestore";
 import { CountedItem } from "./lib/counted_item";
 import { Item, Model, USES_EXACT_IDS } from "./lib/model";
 import { HiddenField } from "./model_types";
 import { trackFiles } from "./lib/trackFiles";
 import { MODEL_ITEM_PREVIEW } from "@/shared/components/ModelItemPreview";
 import { indexForSearch } from "./lib/indexForSearch";
+import UpdateValue from "./lib/update_value";
 //A clone of the firebase authentication model is stored in firestore
 //in order to manage users with the uid as the key
 //Creating users can make use of the client sdk
@@ -71,7 +71,7 @@ export class UserData extends CountedItem {
     if (prevState.profileCompleted)
       this.getCounter().set(
         {
-          completedProfiles: increment(-1),
+          completedProfiles: UpdateValue.add(-1),
         },
         txn
       );

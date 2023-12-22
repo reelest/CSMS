@@ -1,14 +1,26 @@
 import usePromise from "@/shared/utils/usePromise";
 import { Skeleton, Typography } from "@mui/material";
 
+/**
+ * Usage Examples:
+ * <Await value={string|Promise<string>|undefined} chars={number} variant="h3"/>
+ * <Await value={Promise<any>}>
+ *    <Element/>
+ * <Await/>
+ *
+ * @returns
+ */
 export default function Await({
   value,
-  children,
   variant,
   chars = 2,
+  children,
   ...props
 }) {
-  const resolved = usePromise(async () => (await value) ?? null, [value]);
+  const resolved = usePromise(
+    async () => (value === undefined ? value : (await value) ?? null),
+    [value]
+  );
   if (!children) {
     return (
       <Typography variant={variant} {...props}>
@@ -21,7 +33,7 @@ export default function Await({
     );
   } else {
     return resolved === undefined ? (
-      <Skeleton>
+      <Skeleton {...props}>
         <div style={{ display: "inline", visibility: "hidden" }}>
           {children}
         </div>

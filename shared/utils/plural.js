@@ -6,9 +6,9 @@ export default function plural(m) {
 
 export function singular(m) {
   if (!m) return m;
-  if (m.endsWith("s")) {
+  if (m.toLowerCase().endsWith("s")) {
     m = m.slice(0, -1);
-    if (m.endsWith("sse")) return m.slice(0, -1);
+    if (m.toLowerCase().endsWith("sse")) return m.slice(0, -1);
     return m;
   }
   return m;

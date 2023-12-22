@@ -25,7 +25,7 @@ export default function PageHeader({ title, onSearch }) {
         backgroundColor: "white",
         borderBottom: "1px solid rgba(0, 0, 0, 0.05)",
       }}
-      elevation={1}
+      elevation={0}
     >
       <Box
         className="w-full sm:w-auto justify-between items-center flex"

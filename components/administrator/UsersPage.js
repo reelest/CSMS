@@ -28,8 +28,12 @@ import ThemedTable from "@/shared/components/ThemedTable";
 import ActivationRequests from "@/models/activation_requests";
 import { activateUser, createUser } from "@/logic/admin";
 import ModelFormDialog from "@/shared/components/ModelFormDialog";
-import ModelDataView, { supplyModelValues } from "@/shared/components/ModelDataView";
+import ModelDataView, {
+  supplyModelValues,
+} from "@/shared/components/ModelDataView";
 import { DatabaseError } from "@/shared/models/lib/errors";
+import { singular } from "@/shared/utils/plural";
+import sentenceCase from "@/shared/utils/sentenceCase";
 
 function a11yProps(index) {
   return {
@@ -155,8 +159,7 @@ export default function UsersPage() {
             size="large"
             onClick={() => setFormVisible(true)}
           >
-            Add New {TABS[activeTab].name}{" "}
-            <UserAdd size={32} className="ml-2" />
+            Create {TABS[activeTab].name} <UserAdd size={18} className="ml-2" />
           </Button>
         </div>
         <UsersTable
@@ -228,7 +231,13 @@ function UsersForm({ edit, model: UserModel, ...props }) {
     <ModelFormDialog
       edit={edit}
       title={
-        edit ? <>Update Student Registration Info</> : <>Register New Student</>
+        edit ? (
+          <>
+            Update {sentenceCase(singular(UserModel.uniqueName()))} Information
+          </>
+        ) : (
+          <>Register New Student</>
+        )
       }
       model={UserModel}
       meta={meta}

@@ -31,6 +31,9 @@ export class Session extends CountedItem {
   }
 }
 
+/**
+ * @extends {CountedModel<Session>}
+ */
 class SessionModel extends CountedModel {
   async initCounter(item) {
     item.sessions = UpdateValue.arrayUnion();

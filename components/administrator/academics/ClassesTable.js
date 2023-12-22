@@ -18,7 +18,9 @@ export default function ClassesTable() {
       Model={ClassRooms}
       Query={query}
       deps={[query]}
+      pluralTitle={"Classes for " + currentSession}
       props={["name", "branch", "formTeacher"]}
+      noMargin
     />
   );
 }

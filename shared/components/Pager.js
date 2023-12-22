@@ -17,10 +17,10 @@ function Pager({
   while (pages.length < Math.min(numPages, 3)) pages.push("");
   return (
     <Box
-      className="rounded-full px-4 py-2 flex items-center"
+      className="rounded-full px-1 py-0.5 flex items-center"
       sx={{ backgroundColor: "gray.light" }}
     >
-      <TextButton className="group mr-4" onClick={goPrev} disabled={!hasPrev}>
+      <TextButton className="group mr-2" onClick={goPrev} disabled={!hasPrev}>
         <ArrowLeftIcon
           className="text-accent1 group-disabled:text-disabled inline mx-1"
           width={20}
@@ -41,7 +41,7 @@ function Pager({
           {e || ""}
         </ButtonBase>
       ))}
-      <TextButton className="ml-4 group" onClick={goNext} disabled={!hasNext}>
+      <TextButton className="ml-2 group" onClick={goNext} disabled={!hasNext}>
         Next
         <ArrowRightIcon
           className="text-accent1 group-disabled:text-disabled inline mx-1"

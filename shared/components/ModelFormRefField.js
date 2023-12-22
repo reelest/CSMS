@@ -1,5 +1,5 @@
 import { search } from "@/shared/logic/search";
-import { FormField } from "./Form";
+import { FormContext, FormField } from "./Form";
 import {
   createContext,
   forwardRef,
@@ -17,28 +17,24 @@ import {
   CircularProgress,
   IconButton,
   LinearProgress,
-  Modal,
   TextField,
   Typography,
 } from "@mui/material";
 import { _searchValue, _id } from "./SearchInput";
-import ModelItemPreview, { MODEL_ITEM_PREVIEW } from "./ModelItemPreview";
+import ModelItemPreview from "./ModelItemPreview";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useDebounce, useIntersection, useUpdate } from "react-use";
-import { Item, USES_EXACT_IDS } from "@/shared/models/lib/model";
-import { IndexEntry } from "@/shared/models/search_index";
+import { USES_EXACT_IDS } from "@/shared/models/lib/model";
 import ModelFormDialog from "./ModelFormDialog";
 import createQuery from "@/shared/utils/createQuery";
 import Template from "./Template";
-import delay from "@/shared/utils/delay";
 import { ItemDoesNotExist, checkError } from "@/shared/models/lib/errors";
 import useStable from "@/shared/utils/useStable";
-import { Add, AddCircle, Additem, BoxAdd, CloseCircle } from "iconsax-react";
+import { AddCircle, CloseCircle } from "iconsax-react";
 import { useOnCreateItem } from "./ModelForm";
 import { getDefaultValue } from "@/shared/models/lib/model_type_info";
 import { noop } from "@/shared/utils/none";
 import useLogger from "@/shared/utils/useLogger";
-import typeOf from "@/shared/utils/typeof";
 import { getItemFromStore } from "@/shared/models/lib/item_store";
 import Spacer from "./Spacer";
 
@@ -57,8 +53,8 @@ const iteratorContext = createContext();
 export default function ModelFormRefField(props) {
   return <FormField as={RefField} {...props} />;
 }
-async function* asyncIteratorOf(func) {
-  yield* await func();
+async function* asyncIteratorOf(func, arg) {
+  yield* await func(arg);
 }
 
 /**
@@ -168,6 +164,9 @@ function RefField({
       ) : (
         <div className="flex flex-grow h-10 items-center">
           <ModelItemPreview
+            show={{
+              title: true,
+            }}
             item={activeItem}
             {...props}
             sx={{ ...props.sx, minWidth: 0, flexGrow: 1 }}
@@ -205,7 +204,7 @@ function RefField({
             sx={{ mr: 2 }}
             onClick={() => setNewItemModalOpen(true)}
           >
-            New <Add className="ml-1" />
+            Create <AddCircle className="ml-1" />
           </Button>
         )
       ) : null}
@@ -221,6 +220,7 @@ function RefField({
  * @param {*} params.props  */
 
 function PickRef({ value, disabled, setValue, activePreview, query, props }) {
+  const { handler } = useContext(FormContext);
   const [open, setOpen] = useState(false);
   const [filterText, setFilterText] = useState("");
   const [serverFilter, setServerFilter] = useState("");
@@ -238,13 +238,14 @@ function PickRef({ value, disabled, setValue, activePreview, query, props }) {
     setClientFilter(() => createQuery(filterText));
   }, [filterText]);
 
+  const args = typeof query === "function" ? handler.data : null;
   const resultIterator = useMemo(
     () =>
       // testIterator(1000) ||
       typeof query === "string"
         ? search(serverFilter, query.split(" ").filter(Boolean))
         : typeof query === "function"
-        ? asyncIteratorOf(query)
+        ? asyncIteratorOf(query, args)
         : query
         ? query.iterator(0)
         : {
@@ -252,7 +253,7 @@ function PickRef({ value, disabled, setValue, activePreview, query, props }) {
               return { done: true };
             },
           },
-    [serverFilter, query]
+    [serverFilter, query, args]
   );
   const iterator = useIterator(resultIterator);
   const { value: results, loading } = iterator;
@@ -264,6 +265,9 @@ function PickRef({ value, disabled, setValue, activePreview, query, props }) {
         disablePortal
         renderOption={(props, option) => (
           <ModelItemPreview
+            show={{
+              title: true,
+            }}
             item={option}
             {...props}
             sx={{ width: "20rem", maxWidth: "100%", minWidth: 0, ...props.sx }}
@@ -323,6 +327,9 @@ function PickRef({ value, disabled, setValue, activePreview, query, props }) {
                 ? null
                 : activePreview && (
                     <ModelItemPreview
+                      show={{
+                        title: true,
+                      }}
                       className="model-preview"
                       item={activePreview}
                       sx={{ mr: 4 }}

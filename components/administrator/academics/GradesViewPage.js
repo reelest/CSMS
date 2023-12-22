@@ -34,7 +34,7 @@ export default function GradesViewPage() {
           value={selectedClass}
           meta={{ ...Grades.Meta, pickRefQuery: classesQuery }}
         />
-        <ModelTable model={Grades} />
+        <ModelTable model={Grades} noMargin />
       </Form>
     </>
   );

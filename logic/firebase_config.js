@@ -4,10 +4,8 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import isServerSide from "@/shared/utils/is_server_side";
-import { setFirebase } from "@/shared/logic/firebase_init";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-
 // Your web app's Firebase configuration
 export const firebaseConfig = {
   apiKey: "AIzaSyDQQeIYOjPxPyVsLx888hPVpCFXzbn0HJ4",
@@ -20,14 +18,9 @@ export const firebaseConfig = {
 
 // Initialize Firebase but only on client
 const app = isServerSide ? null : initializeApp(firebaseConfig);
-const firestore = isServerSide ? null : getFirestore(app);
-const storage = isServerSide ? null : getStorage(app);
-const auth = isServerSide ? null : getAuth(app);
+export const firestore = isServerSide ? null : getFirestore(app);
+export const storage = isServerSide ? null : getStorage(app);
+export const auth = isServerSide ? null : getAuth(app);
 
-const firestoreNS = "";
-setFirebase({
-  firestore,
-  storage,
-  auth,
-  firestoreNS,
-});
+export const firestoreNS = "";
+export * as DB from "@/shared/logic/firestore_db";

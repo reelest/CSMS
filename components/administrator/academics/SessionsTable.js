@@ -51,6 +51,7 @@ export default function SessionsTable() {
       </Modal>
       <ModelTable
         Model={Sessions}
+        noMargin
         onCreate={() => {
           return new Promise((r, j) => {
             setFormCreationRequest(() => r);

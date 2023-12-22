@@ -1,7 +1,7 @@
 import { None, noop } from "@/shared/utils/none";
 import { Typography } from "@mui/material";
 import Form, { FormErrors, FormSubmit } from "./Form";
-import { createContext, useContext, useEffect, useId, useRef } from "react";
+import { createContext, useContext, useEffect, useRef } from "react";
 import Spacer from "./Spacer";
 import { uploadFile } from "@/shared/logic/storage";
 import { timeFormat } from "d3";
@@ -12,10 +12,7 @@ import { ModelFormField } from "./ModelFormField";
 import { getDefaultValue } from "@/shared/models/lib/model_type_info";
 import pick from "@/shared/utils/pick";
 import { checkError } from "@/shared/models/lib/errors";
-import { FirestoreError } from "firebase/firestore";
 import { FirebaseError } from "firebase/app";
-import { singular } from "@/shared/utils/plural";
-import sentenceCase from "@/shared/utils/sentenceCase";
 const FORM_SECTION = "!modelform-section";
 
 const ItemStoreContext = createContext();
@@ -88,7 +85,7 @@ export default function ModelForm({
           children
         ) : (
           <>
-            <div className="flex flex-wrap justify-between -mx-4">
+            <div className="flex flex-wrap justify-between -mx-4 items-end">
               <Typography
                 variant="body2"
                 color="text.disabled"
