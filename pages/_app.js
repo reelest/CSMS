@@ -13,10 +13,12 @@ setAppLogo(
   </div>
 );
 export default function App({ Component, pageProps }) {
+  const getLayout = Component.getLayout || ((page) => page);
   return (
     <ThemeProvider theme={MuiTheme}>
       <CssBaseline />
-      <Component {...pageProps} />
+
+      {getLayout(<Component {...pageProps} />)}
     </ThemeProvider>
   );
 }

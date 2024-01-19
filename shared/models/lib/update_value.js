@@ -1,5 +1,4 @@
-import { DB, firestore } from "@/shared/logic/firebase_init";
-console.log({ DB, firestore: firestore });
+import { DB } from "@/shared/logic/firebase_init";
 const { increment, arrayUnion, arrayRemove, FieldValue } = DB;
 export default class UpdateValue {
   // resolve() {

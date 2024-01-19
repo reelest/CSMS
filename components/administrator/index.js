@@ -8,50 +8,57 @@ import {
   UserEdit,
   WalletMoney,
 } from "iconsax-react";
-import Overview from "./OverviewPage";
-import Transactions from "./TransactionsPage";
-import Users from "./UsersPage";
-import Events from "./EventsPage";
-import Academics from "./academics/AcademicsPage";
 import UserRedirect from "@/shared/components/UserRedirect";
-import RegistrationsPage from "./RegistrationsPage";
 import Head from "next/head";
-import SettingsPage from "./SettingsPage";
 const TABS = [
   {
     name: "Overview",
     icon: Element3,
-    component: Overview,
+    getComponent() {
+      return import("./OverviewPage");
+    },
   },
   {
     name: "Users",
     icon: UserEdit,
-    component: Users,
+    getComponent() {
+      return import("./UsersPage");
+    },
   },
   {
     name: "Transactions",
     icon: WalletMoney,
-    component: Transactions,
+    getComponent() {
+      return import("./TransactionsPage");
+    },
   },
   {
     name: "Academics",
     icon: Teacher,
-    component: Academics,
+    getComponent() {
+      return import("./academics/AcademicsPage");
+    },
   },
   {
     name: "Registrations",
     icon: UserAdd,
-    component: RegistrationsPage,
+    getComponent() {
+      return import("./RegistrationsPage");
+    },
   },
   {
     name: "News & Events",
     icon: Calendar,
-    component: Events,
+    getComponent() {
+      return import("./EventsPage");
+    },
   },
   {
     name: "Settings",
     icon: Settings,
-    component: SettingsPage,
+    getComponent() {
+      return import("./SettingsPage");
+    },
   },
 ];
 export default function AdministratorsRoute() {

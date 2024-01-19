@@ -4,6 +4,7 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 import isServerSide from "@/shared/utils/is_server_side";
+import { getAirstore } from "@/shared/logic/airstore_db";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // Your web app's Firebase configuration
@@ -18,9 +19,11 @@ export const firebaseConfig = {
 
 // Initialize Firebase but only on client
 const app = isServerSide ? null : initializeApp(firebaseConfig);
-export const firestore = isServerSide ? null : getFirestore(app);
+export const firestore = isServerSide
+  ? null
+  : getAirstore("http://localhost:3001", app);
 export const storage = isServerSide ? null : getStorage(app);
 export const auth = isServerSide ? null : getAuth(app);
 
 export const firestoreNS = "";
-export * as DB from "@/shared/logic/firestore_db";
+export * as DB from "@/shared/logic/airstore_db";

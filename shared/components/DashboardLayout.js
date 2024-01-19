@@ -1,6 +1,7 @@
 import useBreakpoints from "@/shared/utils/useBreakpoints";
 import Sidebar, { useActiveTab } from "./Sidebar";
 import NoSsr from "@mui/material/NoSsr";
+import usePromise from "../utils/usePromise";
 
 const DashboardLayout = ({ renderChild = _renderChild, tabs }) => {
   const isWideScreen = useBreakpoints().lg;
@@ -24,6 +25,12 @@ const _renderChild = function (tab) {
 
 function ChooseLayout({ renderChild, tabs }) {
   const tab = useActiveTab(tabs);
+  usePromise(async () => {
+    if (!tab.component) {
+      tab.component = await tab.getComponent();
+    }
+    return tab.component;
+  }, [tab]);
   return renderChild(
     tabs.find((e) => tab === (e.id ?? e.name.toLowerCase())) ?? tabs[0]
   );
